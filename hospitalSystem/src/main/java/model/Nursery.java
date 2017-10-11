@@ -1,4 +1,4 @@
-package hospitalSystem;
+package model;
 
 public class Nursery {
 	private int nurseryCode;

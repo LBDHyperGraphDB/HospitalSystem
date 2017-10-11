@@ -1,4 +1,4 @@
-package hospitalSystem;
+package model;
 
 import java.util.Date;
 

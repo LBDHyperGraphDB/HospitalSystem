@@ -1,24 +1,20 @@
-package hospitalSystem;
+package model;
 
 public class Hospital {
 	private String hospitalCnpj;
 	private String hospitalName;
 	private String hospitalAddress;
 	private String hospitalPhoneNumber;
-	private String hospitalWingsOfBuilding;
 	
 	public Hospital() {
 		
 	}
 
-	public Hospital(String hospitalCnpj, String hospitalName, String hospitalAddress, String hospitalPhoneNumber,
-			String hospitalWingsOfBuilding) {
-		super();
+	public Hospital(String hospitalCnpj, String hospitalName, String hospitalAddress, String hospitalPhoneNumber) {
 		this.hospitalCnpj = hospitalCnpj;
 		this.hospitalName = hospitalName;
 		this.hospitalAddress = hospitalAddress;
 		this.hospitalPhoneNumber = hospitalPhoneNumber;
-		this.hospitalWingsOfBuilding = hospitalWingsOfBuilding;
 	}
 
 	public String getHospitalCnpj() {
@@ -51,13 +47,5 @@ public class Hospital {
 
 	public void setHospitalPhoneNumber(String hospitalPhoneNumber) {
 		this.hospitalPhoneNumber = hospitalPhoneNumber;
-	}
-
-	public String getHospitalWingsOfBuilding() {
-		return hospitalWingsOfBuilding;
-	}
-
-	public void setHospitalWingsOfBuilding(String hospitalWingsOfBuilding) {
-		this.hospitalWingsOfBuilding = hospitalWingsOfBuilding;
 	}
 }

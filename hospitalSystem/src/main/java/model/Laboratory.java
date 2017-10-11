@@ -1,4 +1,4 @@
-package hospitalSystem;
+package model;
 
 public class Laboratory {
 	private String laboratoryCnpj;
