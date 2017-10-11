@@ -7,6 +7,7 @@ tmp/
 node_modules/
 jaxws/jaxws-client/src/main/
 .recommenders/
+hypergraphdb-1.3/
 
 # OS Files #
 .DS_Store
