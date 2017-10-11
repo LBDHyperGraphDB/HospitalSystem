@@ -29,30 +29,84 @@ public class HospitalSystem {
 				switch (option) {
 				// WingsOfBuilding
 				case 1:
+					view.clear();
+					menu.crudMenu("Alas");
+					int wingOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of wingsOfBuilding
+					// wingsOfBuildingController.chooseAction(wingOption);
 					break;
 				// Nursery
 				case 2:
+					view.clear();
+					menu.crudMenu("Enfermarias");
+					int nurseryOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of nursery
+					// nurseryController.chooseAction(nurseryOption);
 					break;
 				// Laboratories
 				case 3:
+					view.clear();
+					menu.crudMenu("Laboratórios");
+					int laboratoryOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of laboratory
+					// laboratoryController.chooseAction(laboratoryOption);
 					break;
 				// Medical Agreements
 				case 4:
+					view.clear();
+					menu.crudMenu("Convênios");
+					int medicalAgreementOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of medicalAgreement
+					// medicalAgreementController.chooseAction(medicalAgreementOption);
 					break;
 				// Medical Equipments
 				case 5:
+					view.clear();
+					menu.crudMenu("Equipamentos");
+					int medicalEquipmentOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of medicalEquipment
+					// medicalEquipmentController.chooseAction(medicalEquipmentOption);
 					break;
 				// Medical Exams
 				case 6:
+					view.clear();
+					menu.crudMenu("Exames");
+					int medicalExamOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of medicalExam
+					// medicalExamController.chooseAction(medicalExamOption);
 					break;
 				// Doctors
 				case 7:
+					view.clear();
+					menu.crudMenu("Médicos");
+					int doctorOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of doctor
+					// doctorController.chooseAction(doctorOption);
 					break;
 				// Nurses
 				case 8:
+					view.clear();
+					menu.crudMenu("Enfermeiros");
+					int nurseOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of nurse
+					// nurseController.chooseAction(nurseOption);
 					break;
 				// Patients
 				case 9:
+					view.clear();
+					menu.crudMenu("Pacientes");
+					int patientOption = scanner.nextInt();
+					scanner.nextLine();
+					// TODO: Controller of patient
+					// patientController.chooseAction(patientOption);
 					break;
 				// About the hospital
 				case 10:

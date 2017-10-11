@@ -10,10 +10,15 @@ public class Menu {
 		}
 	}
 	
+	public void menuTitle(String title) {
+		title = title.toUpperCase();
+		System.out.println("------------------------------");
+		System.out.println("         " + title + "        ");
+		System.out.println("------------------------------");
+	}
+	
 	public void mainMenu() {
-		System.out.println("------------------------------");
-		System.out.println("             MENU             ");
-		System.out.println("------------------------------");
+		this.menuTitle("Menu");
 		System.out.println("1. Alas");
 		System.out.println("2. Enfermarias");
 		System.out.println("3. Laboratórios");
@@ -25,6 +30,17 @@ public class Menu {
 		System.out.println("9. Pacientes");
 		System.out.println("10. Sobre o hospital");
 		System.out.println("11. Sair");
+		System.out.println("------------------------------");
+		System.out.println("Digite a opção desejada:");
+	}
+	
+	public void crudMenu(String title) {
+		this.menuTitle(title);
+		System.out.println("1. Criar");
+		System.out.println("2. Atualizar");
+		System.out.println("3. Listar");
+		System.out.println("4. Excluir");
+		System.out.println("5. Voltar");
 		System.out.println("------------------------------");
 		System.out.println("Digite a opção desejada:");
 	}
