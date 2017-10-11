@@ -9,8 +9,8 @@ public class WingOfBuilding {
 	}
 	
 	public WingOfBuilding(int wingCode, String wingName) {
-		wingCode = wingCode;
-		wingName = wingName;
+		this.wingCode = wingCode;
+		this.wingName = wingName;
 	}
 
 	public int getWingCode() {
