@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import controller.LaboratoryController;
 import model.Hospital;
 import dao.HospitalDAO;
 import view.Menu;
@@ -51,8 +52,16 @@ public class HospitalSystem {
 					menu.crudMenu("Laboratórios");
 					int laboratoryOption = scanner.nextInt();
 					scanner.nextLine();
-					// TODO: Controller of laboratory
-					// laboratoryController.chooseAction(laboratoryOption);
+					
+					if(laboratoryOption != 5) {
+						LaboratoryController laboratoryController = new LaboratoryController();
+						laboratoryController.chooseAction(laboratoryOption);
+					} else {
+						view.clear();
+						menu.mainMenu();
+						option = scanner.nextInt();
+						scanner.nextLine();
+					}
 					break;
 				// Medical Agreements
 				case 4:

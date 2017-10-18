@@ -18,6 +18,7 @@ public class LaboratoryDAO {
 			// Avoid duplication: do not add if CNPJ exists.
 			if (!this.findLaboratoryByCnpj(laboratoryGraph, laboratory.getLaboratoryCnpj())) {
 				laboratoryGraph.add(laboratory);
+				System.out.println("[SUCESSO] Laboratório adicionado com sucesso!");
 				return true;
 			}
 			else {
@@ -42,7 +43,7 @@ public class LaboratoryDAO {
 			System.out.println();
 			if (laboratories.size() > 0) {
 				System.out.println("------------------------------");
-				System.out.println("         INFORMAÇÕES          ");
+				System.out.println("         LABORATÓRIOS         ");
 				System.out.println("------------------------------");
 				
 				for (Laboratory laboratory: laboratories) {
@@ -85,8 +86,8 @@ public class LaboratoryDAO {
 				laboratory = hg.getOne(laboratoryGraph, hg.and(hg.type(Laboratory.class), hg.eq("laboratoryCnpj", cnpj)));
 				
 				laboratory.setField(attribute, value);
-				HGHandle laboratoryHandle = laboratoryGraph.getHandle(laboratory);
-				laboratoryGraph.update(laboratoryHandle);
+				laboratoryGraph.update(laboratory);
+				System.out.println("[SUCESSO] Laboratório atualizado com sucesso!");
 				return true;
 			} else
 				return false;
@@ -108,6 +109,8 @@ public class LaboratoryDAO {
 				
 				HGHandle laboratoryHandle = laboratoryGraph.getHandle(laboratory);
 				laboratoryGraph.remove(laboratoryHandle);
+				
+				System.out.println("[SUCESSO] Laboratório excluído com sucesso!");
 				return true;
 			} else
 				return false;
