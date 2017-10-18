@@ -9,7 +9,6 @@ import view.Menu;
 
 public class HospitalSystem {
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		
 		Menu menu = new Menu();
@@ -53,14 +52,15 @@ public class HospitalSystem {
 					int laboratoryOption = scanner.nextInt();
 					scanner.nextLine();
 					
+					LaboratoryController laboratoryController = new LaboratoryController();
 					if(laboratoryOption != 5) {
-						LaboratoryController laboratoryController = new LaboratoryController();
 						laboratoryController.chooseAction(laboratoryOption);
 					} else {
-						view.clear();
-						menu.mainMenu();
-						option = scanner.nextInt();
-						scanner.nextLine();
+						option = view.backToMainMenu(view, menu, scanner);
+					}
+					
+					if(laboratoryController.getOption() == 5) {
+						option = view.backToMainMenu(view, menu, scanner);
 					}
 					break;
 				// Medical Agreements
@@ -125,10 +125,7 @@ public class HospitalSystem {
 					String back = scanner.next();
 					
 					if(menu.backToMenu(back)) {
-						view.clear();
-						menu.mainMenu();
-						option = scanner.nextInt();
-						scanner.nextLine();
+						option = view.backToMainMenu(view, menu, scanner);
 					} else {
 						view.clear();
 						System.out.println("Fim da execução.");
@@ -144,14 +141,20 @@ public class HospitalSystem {
 					view.clear();
 					System.out.println("Opção inválida! Tente novamente");
 					
-					view.clear();
-					menu.mainMenu();
-					option = scanner.nextInt();
-					scanner.nextLine();
+					option = view.backToMainMenu(view, menu, scanner);
 					break;
 				}
 			} while (option != 11);
 		}
+	}
+	
+	public int backToMainMenu(HospitalSystem view, Menu menu, Scanner scanner) {
+		view.clear();
+		menu.mainMenu();
+		int option = scanner.nextInt();
+		scanner.nextLine();
+		
+		return option;
 	}
 	
 	public void clear() {

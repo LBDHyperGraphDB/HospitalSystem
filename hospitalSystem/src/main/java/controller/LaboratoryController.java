@@ -15,19 +15,20 @@ public class LaboratoryController {
 	private String description;
 	private String address;
 	private String phoneNumber;
+	private int option;
 	
 	public void chooseAction (int option) {
 		do {
 			switch(option) {
 				case 1:
 					System.out.println("Digite o nome do laboratório: ");
-					this.description = scanner.nextLine();
+					description = scanner.nextLine();
 					System.out.println("Digite o CNPJ do laboratório: ");
-					this.cnpj = scanner.nextLine();
+					cnpj = scanner.nextLine();
 					System.out.println("Digite o endereço do laboratório: ");
-					this.address = scanner.nextLine();
+					address = scanner.nextLine();
 					System.out.println("Digite o telefone do laboratório: ");
-					this.phoneNumber = scanner.nextLine();
+					phoneNumber = scanner.nextLine();
 					
 					Laboratory laboratory = new Laboratory(cnpj, description, address, phoneNumber);
 					laboratoryDAO.addLaboratory(laboratory);
@@ -38,7 +39,7 @@ public class LaboratoryController {
 					break;
 				case 2:
 					System.out.println("Digite o CNPJ do laboratório: ");
-					this.cnpj = scanner.nextLine();
+					cnpj = scanner.nextLine();
 					System.out.println("Qual atributo deseja modificar?");
 					System.out.println("1- Nome    2- CNPJ    3- Endereço    4- Telefone");
 					
@@ -63,7 +64,7 @@ public class LaboratoryController {
 					
 					System.out.println("Digite o novo valor para " + attributeName + ": ");
 					String value = scanner.nextLine();
-					laboratoryDAO.updateLaboratory(this.cnpj, attribute, value);
+					laboratoryDAO.updateLaboratory(cnpj, attribute, value);
 					
 					menu.crudMenu("Laboratório");
 					option = scanner.nextInt();
@@ -75,29 +76,47 @@ public class LaboratoryController {
 					String back = scanner.nextLine();
 					
 					if(menu.backToMenu(back)) {
+						this.clear();
 						menu.crudMenu("Laboratórios");
 						option = scanner.nextInt();
 						scanner.nextLine();
 					} else {
-						menu.mainMenu();
 						option = 5;
 					}
 					break;
 				case 4:
 					System.out.println("Digite o CNPJ do laboratório: ");
-					this.cnpj = scanner.nextLine();
+					cnpj = scanner.nextLine();
 					
-					laboratoryDAO.deleteLaboratory(this.cnpj);
+					laboratoryDAO.deleteLaboratory(cnpj);
 					
 					menu.crudMenu("Laboratório");
 					option = scanner.nextInt();
 					scanner.nextLine();
 					break;
 				case 5:
-					menu.mainMenu();
-					option = 5;
+					this.clear();
+					System.out.println("Voltando ao menu principal...");
+					break;
+				default:
+					this.clear();
+					System.out.println("Opção inválida! Tente novamente");
+					
+					menu.crudMenu("Laboratório");
+					option = scanner.nextInt();
+					scanner.nextLine();
 					break;
 			}
+			this.option = option;
 		} while (option != 5);
+	}
+
+	public int getOption() {
+		return option;
+	}
+	
+	public void clear() {
+		for (int i = 0; i < 3; i++) 
+			System.out.println();
 	}
 }
