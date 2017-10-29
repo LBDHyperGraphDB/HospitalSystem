@@ -2,8 +2,6 @@ package controller;
 
 import java.util.Scanner;
 
-import org.hypergraphdb.HyperGraph;
-
 import dao.LaboratoryDAO;
 import model.Laboratory;
 import view.Menu;
@@ -18,10 +16,6 @@ public class LaboratoryController {
 	private String address;
 	private String phoneNumber;
 	private int option;
-	
-	public LaboratoryController(HyperGraph hospitalGraph) {
-		this.laboratoryDAO = new LaboratoryDAO(hospitalGraph);
-	}
 	
 	public void chooseAction (int option) {
 		do {
