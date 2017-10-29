@@ -1,23 +1,24 @@
 package dao;
 
-import org.hypergraphdb.HyperGraph;
 import org.hypergraphdb.HGQuery.hg;
 import org.hypergraphdb.HGHandle;
+import org.hypergraphdb.HyperGraph;
 
 import java.util.List;
 import model.Laboratory;
 
 public class LaboratoryDAO {
-	String databaseLocation = "../hypergraphdb-1.3"; 
-	HyperGraph laboratoryGraph = null;
-
+	HyperGraph hospitalGraph = null;
+	
+	public LaboratoryDAO(HyperGraph hospitalGraph) {
+		this.hospitalGraph = hospitalGraph;
+	}
+	
 	public boolean addLaboratory(Laboratory laboratory) {
 		try {
-			laboratoryGraph = new HyperGraph(databaseLocation);
-			
 			// Avoid duplication: do not add if CNPJ exists.
-			if (!this.findLaboratoryByCnpj(laboratoryGraph, laboratory.getLaboratoryCnpj())) {
-				laboratoryGraph.add(laboratory);
+			if (!this.findLaboratoryByCnpj(hospitalGraph, laboratory.getLaboratoryCnpj())) {
+				hospitalGraph.add(laboratory);
 				System.out.println("[SUCESSO] Laboratório adicionado com sucesso!");
 				return true;
 			}
@@ -29,16 +30,12 @@ public class LaboratoryDAO {
 		   System.out.println("[ERRO]: O Laboratório " + laboratory.getLaboratoryDescription() + " não pôde ser adicionado.");
 	       t.printStackTrace();
 	       return false;
-	   } finally {
-		   laboratoryGraph.close();
 	   }
 	}
 	
 	public void getAllLaboratories() {
 		try {
-			laboratoryGraph = new HyperGraph(databaseLocation);
-			
-			List<Laboratory> laboratories = hg.getAll(laboratoryGraph, hg.and(hg.type(Laboratory.class)));
+			List<Laboratory> laboratories = hg.getAll(hospitalGraph, hg.and(hg.type(Laboratory.class)));
 			
 			System.out.println();
 			if (laboratories.size() > 0) {
@@ -58,14 +55,12 @@ public class LaboratoryDAO {
 			System.out.println();
 		} catch (Throwable t) {
 			t.printStackTrace();
-		} finally {
-			laboratoryGraph.close();
 		}
 	}
 	
-	public boolean findLaboratoryByCnpj(HyperGraph laboratoryGraph, String cnpj) {
+	public boolean findLaboratoryByCnpj(HyperGraph hospitalGraph, String cnpj) {
 		try {
-			List<Laboratory> laboratories = hg.getAll(laboratoryGraph, hg.and(hg.type(Laboratory.class), hg.eq("laboratoryCnpj", cnpj)));
+			List<Laboratory> laboratories = hg.getAll(hospitalGraph, hg.and(hg.type(Laboratory.class), hg.eq("laboratoryCnpj", cnpj)));
 			if (laboratories.size() > 0)
 				return true;
 			else
@@ -79,14 +74,12 @@ public class LaboratoryDAO {
 	
 	public boolean updateLaboratory(String cnpj, String attribute, String value) {
 		try {
-			laboratoryGraph = new HyperGraph(databaseLocation);
-			
-			if (this.findLaboratoryByCnpj(laboratoryGraph, cnpj)) {
+			if (this.findLaboratoryByCnpj(hospitalGraph, cnpj)) {
 				Laboratory laboratory = new Laboratory();
-				laboratory = hg.getOne(laboratoryGraph, hg.and(hg.type(Laboratory.class), hg.eq("laboratoryCnpj", cnpj)));
+				laboratory = hg.getOne(hospitalGraph, hg.and(hg.type(Laboratory.class), hg.eq("laboratoryCnpj", cnpj)));
 				
 				laboratory.setField(attribute, value);
-				laboratoryGraph.update(laboratory);
+				hospitalGraph.update(laboratory);
 				System.out.println("[SUCESSO] Laboratório atualizado com sucesso!");
 				return true;
 			} else
@@ -95,20 +88,17 @@ public class LaboratoryDAO {
 		   System.out.println("[ERRO]: O Laboratório de CNPJ " + cnpj + " não pôde ser atualizado.");
 	       t.printStackTrace();
 	       return false;
-	   } finally {
-	       laboratoryGraph.close();
 	   }
 	}
 	
 	public boolean deleteLaboratory(String cnpj) {
 		try {
-			laboratoryGraph = new HyperGraph(databaseLocation);
-			if (this.findLaboratoryByCnpj(laboratoryGraph, cnpj)) {
+			if (this.findLaboratoryByCnpj(hospitalGraph, cnpj)) {
 				Laboratory laboratory = new Laboratory();
-				laboratory = hg.getOne(laboratoryGraph, hg.and(hg.type(Laboratory.class), hg.eq("laboratoryCnpj", cnpj)));
+				laboratory = hg.getOne(hospitalGraph, hg.and(hg.type(Laboratory.class), hg.eq("laboratoryCnpj", cnpj)));
 				
-				HGHandle laboratoryHandle = laboratoryGraph.getHandle(laboratory);
-				laboratoryGraph.remove(laboratoryHandle);
+				HGHandle laboratoryHandle = hospitalGraph.getHandle(laboratory);
+				hospitalGraph.remove(laboratoryHandle);
 				
 				System.out.println("[SUCESSO] Laboratório excluído com sucesso!");
 				return true;
@@ -119,8 +109,6 @@ public class LaboratoryDAO {
 		   System.out.println("[ERRO]: O Laboratório de CNPJ " + cnpj + " não pôde ser excluído.");
 	       t.printStackTrace();
 	       return false;
-	   } finally {
-		   laboratoryGraph.close();
 	   }
 	}
 }
