@@ -8,13 +8,14 @@ import java.util.List;
 import model.Hospital;
 
 public class HospitalDAO {
-	String databaseLocation = "../hypergraphdb-1.3"; 
 	HyperGraph hospitalGraph = null;
+	
+	public HospitalDAO(HyperGraph hospitalGraph) {
+		this.hospitalGraph = hospitalGraph;
+	}
 
 	public boolean addHospital(Hospital hospital) {
 		try {
-			hospitalGraph = new HyperGraph(databaseLocation);
-			
 			// Avoid duplication: do not add if CNPJ exists.
 			if (!this.findHospitalByCnpj(hospitalGraph, hospital.getHospitalCnpj())) {
 				hospitalGraph.add(hospital);
@@ -28,15 +29,11 @@ public class HospitalDAO {
 		   System.out.println("[ERRO]: O Hospital " + hospital.getHospitalName() + " não pôde ser adicionado.");
 	       t.printStackTrace();
 	       return false;
-	   } finally {
-		   hospitalGraph.close();
 	   }
 	}
 	
 	public void getAllHospitals() {
 		try {
-			hospitalGraph = new HyperGraph(databaseLocation);
-			
 			List<Hospital> hospitals = hg.getAll(hospitalGraph, hg.and(hg.type(Hospital.class)));
 			
 			System.out.println();
@@ -57,8 +54,6 @@ public class HospitalDAO {
 			System.out.println();
 		} catch (Throwable t) {
 			t.printStackTrace();
-		} finally {
-			hospitalGraph.close();
 		}
 	}
 	
@@ -78,8 +73,6 @@ public class HospitalDAO {
 	
 	public boolean updateHospital(String cnpj, String attribute, String value) {
 		try {
-			hospitalGraph = new HyperGraph(databaseLocation);
-			
 			if (this.findHospitalByCnpj(hospitalGraph, cnpj)) {
 				Hospital hospital = new Hospital();
 				hospital = hg.getOne(hospitalGraph, hg.and(hg.type(Hospital.class), hg.eq("hospitalCnpj", cnpj)));
@@ -94,14 +87,11 @@ public class HospitalDAO {
 		   System.out.println("[ERRO]: O Hospital de CNPJ " + cnpj + " não pôde ser atualizado.");
 	       t.printStackTrace();
 	       return false;
-	   } finally {
-	       hospitalGraph.close();
 	   }
 	}
 	
 	public boolean deleteHospital(String cnpj) {
 		try {
-			hospitalGraph = new HyperGraph(databaseLocation);
 			if (this.findHospitalByCnpj(hospitalGraph, cnpj)) {
 				Hospital hospital = new Hospital();
 				hospital = hg.getOne(hospitalGraph, hg.and(hg.type(Hospital.class), hg.eq("hospitalCnpj", cnpj)));
@@ -116,8 +106,6 @@ public class HospitalDAO {
 		   System.out.println("[ERRO]: O Hospital de CNPJ " + cnpj + " não pôde ser excluído.");
 	       t.printStackTrace();
 	       return false;
-	   } finally {
-		   hospitalGraph.close();
 	   }
 	}
 }
