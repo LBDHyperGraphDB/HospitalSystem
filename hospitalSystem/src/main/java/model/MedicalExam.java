@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class MedicalExam {
 	private int examCode;
 	private String examDescription;
@@ -39,4 +41,14 @@ public class MedicalExam {
 	public void setExamRestriction(String examRestriction) {
 		this.examRestriction = examRestriction;
 	}
+	
+	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
+	    Field field = getClass().getDeclaredField(fieldName);
+	    field.set(this, value);
+	    
+	    System.out.println(fieldName);
+	    System.out.println(value);
+	    System.out.println("--------------");
+	    System.out.println(this.getExamDescription());
+}
 }
