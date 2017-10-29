@@ -11,12 +11,16 @@ import model.MedicalExam;
 
 public class MedicalExamDAO {
 	String databaseLocation = "../hypergraphdb-1.3";
-	HyperGraph medicalExamGraph = null;
+	HyperGraph hospitalGraph = null;
+	
+	public MedicalExamDAO(HyperGraph hospitalGraph) {
+		this.hospitalGraph = hospitalGraph;
+	}
 	
 	public boolean addMedicalExam(MedicalExam medicalExam) {
 		try {
-			medicalExamGraph = new HyperGraph(databaseLocation);
-			medicalExamGraph.add(medicalExam);
+			hospitalGraph = new HyperGraph(databaseLocation);
+			hospitalGraph.add(medicalExam);
 			System.out.println("[SUCESSO] Exame médico adicionado com sucesso!");
 			return true;
 		} catch(Throwable t) {
@@ -24,15 +28,15 @@ public class MedicalExamDAO {
 		    t.printStackTrace();
 		    return false;
 		} finally {
-			medicalExamGraph.close();
+			hospitalGraph.close();
 		}
 	}
 	
 	public void getAllMedicalExams() {
 		try {
-			medicalExamGraph = new HyperGraph(databaseLocation);
+			hospitalGraph = new HyperGraph(databaseLocation);
 			
-			List<MedicalExam> medicalExams = hg.getAll(medicalExamGraph, hg.and(hg.type(MedicalExam.class)));
+			List<MedicalExam> medicalExams = hg.getAll(hospitalGraph, hg.and(hg.type(MedicalExam.class)));
 			
 			System.out.println();
 			if (medicalExams.size() > 0) {
@@ -52,13 +56,13 @@ public class MedicalExamDAO {
 		} catch (Throwable t) {
 			t.printStackTrace();
 		} finally {
-			medicalExamGraph.close();
+			hospitalGraph.close();
 		}
 	}
 	
-	public boolean findMedicalExamByCode(HyperGraph medicalExamGraph, int medicalExamCode) {
+	public boolean findMedicalExamByCode(HyperGraph hospitalGraph, int medicalExamCode) {
 		try {
-			List<MedicalExam> medicalExams = hg.getAll(medicalExamGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", medicalExamCode)));
+			List<MedicalExam> medicalExams = hg.getAll(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", medicalExamCode)));
 			if (medicalExams.size() > 0)
 				return true;
 			else
@@ -72,14 +76,14 @@ public class MedicalExamDAO {
 	
 	public boolean updateMedicalExam(int medicalExamCode, String attribute, String value) {
 		try {
-			medicalExamGraph = new HyperGraph(databaseLocation);
+			hospitalGraph = new HyperGraph(databaseLocation);
 			
-			if (this.findMedicalExamByCode(medicalExamGraph, medicalExamCode)) {
+			if (this.findMedicalExamByCode(hospitalGraph, medicalExamCode)) {
 				MedicalExam medicalExam = new MedicalExam();
-				medicalExam = hg.getOne(medicalExamGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", medicalExamCode)));
+				medicalExam = hg.getOne(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", medicalExamCode)));
 				
 				medicalExam.setField(attribute, value);
-				medicalExamGraph.update(medicalExam);
+				hospitalGraph.update(medicalExam);
 				System.out.println("[SUCESSO] Exame atualizado com sucesso!");
 				return true;
 			} else
@@ -89,7 +93,28 @@ public class MedicalExamDAO {
 	       t.printStackTrace();
 	       return false;
 	   } finally {
-	       medicalExamGraph.close();
+		   hospitalGraph.close();
 	   }
 	}
+	
+	public boolean deleteMedicalExam(int code) {
+		try {
+			if (this.findMedicalExamByCode(hospitalGraph, code)) {
+				MedicalExam medicalExam = new MedicalExam();
+				medicalExam = hg.getOne(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", code)));
+				
+				HGHandle medicalExamHandle = hospitalGraph.getHandle(medicalExam);
+				hospitalGraph.remove(medicalExamHandle);
+				
+				System.out.println("[SUCESSO] Exame excluído com sucesso!");
+				return true;
+			} else
+				return false;
+			
+	   } catch (Throwable t) {
+		   System.out.println("[ERRO]: O Exame de código " + code + " não pôde ser excluído.");
+	       t.printStackTrace();
+	       return false;
+	   }
+}
 }
