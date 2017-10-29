@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class Laboratory {
 	private String laboratoryCnpj;
 	private String laboratoryDescription;
@@ -48,5 +50,15 @@ public class Laboratory {
 
 	public void setLaboratoryPhoneNumber(String laboratoryPhoneNumber) {
 		this.laboratoryPhoneNumber = laboratoryPhoneNumber;
+	}
+	
+	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
+	    Field field = getClass().getDeclaredField(fieldName);
+	    field.set(this, value);
+	    
+	    System.out.println(fieldName);
+	    System.out.println(value);
+	    System.out.println("--------------");
+	    System.out.println(this.getLaboratoryAddress());
 	}
 }
