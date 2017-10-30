@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import controller.LaboratoryController;
 import controller.MedicalExamController;
+import controller.WingOfBuildingController;
 
 import org.hypergraphdb.HyperGraph;
 import model.Hospital;
@@ -40,8 +41,17 @@ public class HospitalSystem {
 							menu.crudMenu("Alas");
 							int wingOption = scanner.nextInt();
 							scanner.nextLine();
-							// TODO: Controller of wingsOfBuilding
-							// wingsOfBuildingController.chooseAction(wingOption);
+							
+							WingOfBuildingController wingOfBuildingController = new WingOfBuildingController(hospitalGraph);
+							if(wingOption != 5) {
+								wingOfBuildingController.chooseAction(wingOption);
+							} else {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
+							
+							if(wingOfBuildingController.getOption() == 5) {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
 							break;
 						// Nursery
 						case 2:

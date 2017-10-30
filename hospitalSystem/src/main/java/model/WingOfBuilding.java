@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class WingOfBuilding {
 	private int wingCode;
 	private String wingName;
@@ -27,5 +29,10 @@ public class WingOfBuilding {
 
 	public void setWingName(String wingName) {
 		this.wingName = wingName;
+	}
+	
+	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
+	    Field field = getClass().getDeclaredField(fieldName);
+	    field.set(this, value);
 	}
 }
