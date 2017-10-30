@@ -20,9 +20,14 @@ public class MedicalExamDAO {
 	public boolean addMedicalExam(MedicalExam medicalExam) {
 		try {
 			hospitalGraph = new HyperGraph(databaseLocation);
-			hospitalGraph.add(medicalExam);
-			System.out.println("[SUCESSO] Exame médico adicionado com sucesso!");
-			return true;
+			if (!this.findMedicalExamByCode(hospitalGraph, medicalExam.getExamCode())) {
+				hospitalGraph.add(medicalExam);
+				System.out.println("[SUCESSO] Exame médico adicionado com sucesso!");
+				return true;
+			}else {
+				System.out.println("[ERRO] O código" + medicalExam.getExamCode() + "já existe");
+				return false;
+			}
 		} catch(Throwable t) {
 			System.out.println("[ERRO]: O Laboratório " + medicalExam.getExamDescription() + " não pôde ser adicionado.");
 		    t.printStackTrace();
@@ -99,6 +104,7 @@ public class MedicalExamDAO {
 	
 	public boolean deleteMedicalExam(int code) {
 		try {
+			hospitalGraph = new HyperGraph(databaseLocation);
 			if (this.findMedicalExamByCode(hospitalGraph, code)) {
 				MedicalExam medicalExam = new MedicalExam();
 				medicalExam = hg.getOne(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", code)));
@@ -115,6 +121,8 @@ public class MedicalExamDAO {
 		   System.out.println("[ERRO]: O Exame de código " + code + " não pôde ser excluído.");
 	       t.printStackTrace();
 	       return false;
+	   } finally {
+			   hospitalGraph.close();
 	   }
-}
+	}
 }

@@ -44,11 +44,6 @@ public class MedicalExam {
 	
 	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
 	    Field field = getClass().getDeclaredField(fieldName);
-	    field.set(this, value);
-	    
-	    System.out.println(fieldName);
-	    System.out.println(value);
-	    System.out.println("--------------");
-	    System.out.println(this.getExamDescription());
-}
+	    field.set(this, value);    
+	}
 }
