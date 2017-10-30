@@ -5,6 +5,8 @@ import java.util.Scanner;
 import org.hypergraphdb.HyperGraph;
 
 import controller.LaboratoryController;
+import controller.MedicalExamController;
+
 import org.hypergraphdb.HyperGraph;
 import model.Hospital;
 import dao.HospitalDAO;
@@ -94,8 +96,17 @@ public class HospitalSystem {
 						menu.crudMenu("Exames");
 						int medicalExamOption = scanner.nextInt();
 						scanner.nextLine();
-						// TODO: Controller of medicalExam
-						// medicalExamController.chooseAction(medicalExamOption);
+						
+						MedicalExamController medicalExamController = new MedicalExamController(hospitalGraph);
+						if(medicalExamOption != 5) {
+							medicalExamController.chooseAction(medicalExamOption);
+						} else {
+							option = view.backToMainMenu(view, menu, scanner);
+						}
+						
+						if(medicalExamController.getOption() == 5) {
+							option = view.backToMainMenu(view, menu, scanner);
+						}
 						break;
 					// Doctors
 					case 7:
