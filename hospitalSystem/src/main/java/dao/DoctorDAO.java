@@ -22,7 +22,7 @@ public class DoctorDAO {
             // Avoid duplication: do not add if CRM exists.
             if (!this.findDoctorByCRM(hospitalGraph, doctor.getDoctorCrm())) {
                 hospitalGraph.add(doctor);
-                System.out.println("[SUCESSO] LaboratÃ³rio adicionado com sucesso!");
+                System.out.println("[SUCESSO] Médico adicionado com sucesso!");
                 return true;
 
             } else {
@@ -47,7 +47,7 @@ public class DoctorDAO {
             System.out.println();
             if (doctors.size() > 0) {
                 System.out.println("------------------------------");
-                System.out.println("         LABORATÃ“RIOS         ");
+                System.out.println("         MÉDICOS         ");
                 System.out.println("------------------------------");
 
                 for (Doctor doctor : doctors) {
@@ -116,8 +116,8 @@ public class DoctorDAO {
                 Doctor doctor = new Doctor();
                 doctor = hg.getOne(hospitalGraph, hg.and(hg.type(Doctor.class), hg.eq("doctorCrm", Crm)));
 
-                HGHandle laboratoryHandle = hospitalGraph.getHandle(doctor);
-                hospitalGraph.remove(laboratoryHandle);
+                HGHandle doctorHandle = hospitalGraph.getHandle(doctor);
+                hospitalGraph.remove(doctorHandle);
 
                 System.out.println("[SUCESSO] Médico excluído com sucesso!");
                 return true;

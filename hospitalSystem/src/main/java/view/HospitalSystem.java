@@ -7,6 +7,7 @@ import org.hypergraphdb.HyperGraph;
 import controller.DoctorController;
 import controller.LaboratoryController;
 import controller.MedicalExamController;
+import controller.NurseController;
 import controller.WingOfBuildingController;
 import dao.HospitalDAO;
 import model.Hospital;
@@ -137,8 +138,14 @@ public class HospitalSystem {
                         menu.crudMenu("Enfermeiros");
                         int nurseOption = scanner.nextInt();
                         scanner.nextLine();
-                        // TODO: Controller of nurse
-                        // nurseController.chooseAction(nurseOption);
+
+                        NurseController nurseController = new NurseController(hospitalGraph);
+                        if (nurseOption != 5) {
+                            nurseController.chooseAction(nurseOption);
+                        } else {
+                            option = view.backToMainMenu(view, menu, scanner);
+                        }
+
                         break;
                     // Patients
                     case 9:
