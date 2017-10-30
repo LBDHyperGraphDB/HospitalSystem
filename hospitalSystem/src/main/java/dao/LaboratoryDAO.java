@@ -11,6 +11,10 @@ public class LaboratoryDAO {
 	String databaseLocation = "../hypergraphdb-1.3";
 	HyperGraph hospitalGraph = null;
 	
+	public LaboratoryDAO(HyperGraph hospitalGraph) {
+		this.hospitalGraph = hospitalGraph;
+	}
+	
 	public boolean addLaboratory(Laboratory laboratory) {
 		try {
 			hospitalGraph = new HyperGraph(databaseLocation);
@@ -72,9 +76,7 @@ public class LaboratoryDAO {
 			System.out.println("[ERRO]: Ocorreu um erro ao buscar o CNPJ " + cnpj + ".");
 			t.printStackTrace();
 			return false;
-		} finally {
-		   hospitalGraph.close();
-	   }
+		}
 	}
 	
 	public boolean updateLaboratory(String cnpj, String attribute, String value) {
