@@ -21,17 +21,17 @@ public class Menu {
         this.menuTitle("Menu");
         System.out.println("1. Alas");
         System.out.println("2. Enfermarias");
-        System.out.println("3. Laboratórios");
-        System.out.println("4. Convênios");
+        System.out.println("3. LaboratÃ³rios");
+        System.out.println("4. ConvÃªnios");
         System.out.println("5. Equipamentos");
         System.out.println("6. Exames");
-        System.out.println("7. Médicos");
+        System.out.println("7. MÃ©dicos");
         System.out.println("8. Enfermeiros");
         System.out.println("9. Pacientes");
         System.out.println("10. Sobre o hospital");
         System.out.println("11. Sair");
         System.out.println("------------------------------");
-        System.out.println("Digite a opção desejada:");
+        System.out.println("Digite a opÃ§Ã£o desejada:");
     }
 
     public void crudMenu(String title) {
@@ -42,6 +42,6 @@ public class Menu {
         System.out.println("4. Excluir");
         System.out.println("5. Voltar");
         System.out.println("------------------------------");
-        System.out.println("Digite a opção desejada:");
+        System.out.println("Digite a opÃ§Ã£o desejada:");
     }
 }

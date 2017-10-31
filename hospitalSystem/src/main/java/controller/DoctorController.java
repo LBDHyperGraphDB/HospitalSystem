@@ -12,6 +12,9 @@ public class DoctorController {
     Menu menu = new Menu();
     DoctorDAO doctorDAO = null;
     Scanner scanner = new Scanner(System.in);
+    private String name;
+    private String email;
+    private String phoneNumber;
     private String crm;
     private String titration;
     private String maritalState;
@@ -27,29 +30,35 @@ public class DoctorController {
         do {
             switch (option) {
             case 1:
-                System.out.println("Digite o CRM do mÈdico: ");
+                System.out.println("Digite o nome do m√©dico");
+                name = scanner.nextLine();
+                System.out.println("Digite o email do m√©dico");
+                email = scanner.nextLine();
+                System.out.println("Digite o telefone do m√©dico");
+                phoneNumber = scanner.nextLine();
+                System.out.println("Digite o CRM do m√©dico: ");
                 crm = scanner.nextLine();
-                System.out.println("Digite o titulaÁ„o do mÈdico: ");
+                System.out.println("Digite o titula√ß√£o do m√©dico: ");
                 titration = scanner.nextLine();
-                System.out.println("Digite o estado civil do mÈdico: ");
+                System.out.println("Digite o estado civil do m√©dico: ");
                 maritalState = scanner.nextLine();
-                System.out.println("Digite o nome da m„e do mÈdico: ");
+                System.out.println("Digite o nome da m√£e do m√©dico: ");
                 motherName = scanner.nextLine();
-                System.out.println("Digite o nome do pai do mÈdico: ");
+                System.out.println("Digite o nome do pai do m√©dico: ");
                 fatherName = scanner.nextLine();
 
                 Doctor doctor = new Doctor(crm, titration, maritalState, motherName, fatherName);
                 doctorDAO.addDoctor(doctor);
 
-                menu.crudMenu("MÈdico");
+                menu.crudMenu("m√©dico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
             case 2:
-                System.out.println("Digite o CRM do mÈdico: ");
+                System.out.println("Digite o CRM do m√©dico: ");
                 crm = scanner.nextLine();
                 System.out.println("Qual atributo deseja modificar?");
-                System.out.println("1- Crm    2- TitulaÁ„o    3- Estado CivÌl    4- Nome da m„e    5- Nome do pai ");
+                System.out.println("1- Crm    2- Titula√ß√£o    3- Estado Civol    4- Nome da m√£e    5- Nome do pai ");
 
                 int attributeNumber = scanner.nextInt();
                 scanner.nextLine();
@@ -77,7 +86,7 @@ public class DoctorController {
                 String value = scanner.nextLine();
                 doctorDAO.updateDoctor(crm, attribute, value);
 
-                menu.crudMenu("MÈdico");
+                menu.crudMenu("m√©dico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -88,7 +97,7 @@ public class DoctorController {
 
                 if (menu.backToMenu(back)) {
                     this.clear();
-                    menu.crudMenu("MÈdicos");
+                    menu.crudMenu("m√©dicos");
                     option = scanner.nextInt();
                     scanner.nextLine();
                 } else {
@@ -96,12 +105,12 @@ public class DoctorController {
                 }
                 break;
             case 4:
-                System.out.println("Digite o CRM do MÈdico: ");
+                System.out.println("Digite o CRM do m√©dico: ");
                 crm = scanner.nextLine();
 
                 doctorDAO.deleteDoctor(crm);
 
-                menu.crudMenu("Laborat√≥rio");
+                menu.crudMenu("m√©dico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -113,7 +122,7 @@ public class DoctorController {
                 this.clear();
                 System.out.println("Op√ß√£o inv√°lida! Tente novamente");
 
-                menu.crudMenu("MÈdico");
+                menu.crudMenu("m√©dico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;

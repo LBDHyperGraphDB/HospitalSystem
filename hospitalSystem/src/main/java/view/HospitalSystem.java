@@ -8,6 +8,7 @@ import controller.DoctorController;
 import controller.LaboratoryController;
 import controller.MedicalExamController;
 import controller.NurseController;
+import controller.PatientController;
 import controller.WingOfBuildingController;
 import dao.HospitalDAO;
 import model.Hospital;
@@ -153,8 +154,13 @@ public class HospitalSystem {
                         menu.crudMenu("Pacientes");
                         int patientOption = scanner.nextInt();
                         scanner.nextLine();
-                        // TODO: Controller of patient
-                        // patientController.chooseAction(patientOption);
+                        PatientController patientController = new PatientController(hospitalGraph);
+                        if (patientOption != 5) {
+                            patientController.chooseAction(patientOption);
+                        } else {
+                            option = view.backToMainMenu(view, menu, scanner);
+
+                        }
                         break;
                     // About the hospital
                     case 10:

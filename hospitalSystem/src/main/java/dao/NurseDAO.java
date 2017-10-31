@@ -50,7 +50,7 @@ public class NurseDAO {
 
                 for (Nurse nurse : nurses) {
                     System.out.println("Nome: " + nurse.getPersonName());
-                    System.out.println("QualificaÁ„o: " + nurse.getNurseQualification());
+                    System.out.println("Qualifica√£o: " + nurse.getNurseQualification());
                     System.out.println("COREN: " + nurse.getNurseCoren());
 
                     System.out.println("------------------------------");
@@ -122,7 +122,7 @@ public class NurseDAO {
             }
 
         } catch (Throwable t) {
-            System.out.println("[ERRO]: A enfermeira de Coren " + coren + " n„o pode ser excluÌda.");
+            System.out.println("[ERRO]: A enfermeira de Coren " + coren + " n√£o pode ser exclu√≠da.");
             t.printStackTrace();
             return false;
         } finally {

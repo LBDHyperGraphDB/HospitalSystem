@@ -22,7 +22,7 @@ public class DoctorDAO {
             // Avoid duplication: do not add if CRM exists.
             if (!this.findDoctorByCRM(hospitalGraph, doctor.getDoctorCrm())) {
                 hospitalGraph.add(doctor);
-                System.out.println("[SUCESSO] MÈdico adicionado com sucesso!");
+                System.out.println("[SUCESSO] M√©dico adicionado com sucesso!");
                 return true;
 
             } else {
@@ -30,7 +30,7 @@ public class DoctorDAO {
                 return true;
             }
         } catch (Throwable t) {
-            System.out.println("[ERRO]: O mÈdico " + doctor.getPersonName() + " n√£o p√¥de ser adicionado.");
+            System.out.println("[ERRO]: O m√©dico " + doctor.getPersonName() + " n√£o p√¥de ser adicionado.");
             t.printStackTrace();
             return false;
         } finally {
@@ -47,20 +47,20 @@ public class DoctorDAO {
             System.out.println();
             if (doctors.size() > 0) {
                 System.out.println("------------------------------");
-                System.out.println("         M…DICOS         ");
+                System.out.println("         M√âDICOS         ");
                 System.out.println("------------------------------");
 
                 for (Doctor doctor : doctors) {
                     System.out.println("Nome: " + doctor.getPersonName());
                     System.out.println("Email: " + doctor.getPersonEmail());
+                    System.out.println("Telefone" + doctor.getPersonPhoneNumber());
                     System.out.println("CRM: " + doctor.getDoctorCrm());
-                    System.out.println("Estado Civil: " + doctor.getDoctorMaritalState());
-                    System.out.println("TitulaÁ„o: " + doctor.getDoctorTitration());
+                    System.out.println("Titula√ß√£o: " + doctor.getDoctorTitration());
 
                     System.out.println("------------------------------");
                 }
             } else {
-                System.out.print("N√£o h√° mÈdicos cadastrados.");
+                System.out.print("N√£o h√° m√©dicos cadastrados.");
             }
             System.out.println();
         } catch (Throwable t) {
@@ -95,13 +95,13 @@ public class DoctorDAO {
 
                 doctor.setField(attribute, value);
                 hospitalGraph.update(doctor);
-                System.out.println("[SUCESSO] mÈdico atualizado com sucesso!");
+                System.out.println("[SUCESSO] m√©dico atualizado com sucesso!");
                 return true;
             } else {
                 return false;
             }
         } catch (Throwable t) {
-            System.out.println("[ERRO]: O mÈdico de CRM " + Crm + " n„o pode ser atualizado.");
+            System.out.println("[ERRO]: O m√©dico de CRM " + Crm + " n√£o pode ser atualizado.");
             t.printStackTrace();
             return false;
         } finally {
@@ -119,14 +119,14 @@ public class DoctorDAO {
                 HGHandle doctorHandle = hospitalGraph.getHandle(doctor);
                 hospitalGraph.remove(doctorHandle);
 
-                System.out.println("[SUCESSO] MÈdico excluÌdo com sucesso!");
+                System.out.println("[SUCESSO] M√©dico exclu√≠do com sucesso!");
                 return true;
             } else {
                 return false;
             }
 
         } catch (Throwable t) {
-            System.out.println("[ERRO]: O mÈdico de CRM " + Crm + " n„o pode ser excluÌdo.");
+            System.out.println("[ERRO]: O m√©dico de CRM " + Crm + " n√£o pode ser exclu√≠do.");
             t.printStackTrace();
             return false;
         } finally {

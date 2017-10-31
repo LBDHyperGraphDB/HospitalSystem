@@ -26,7 +26,7 @@ public class NurseController {
         do {
             switch (option) {
             case 1:
-                System.out.println("Digite a qualificação da enfermeira: ");
+                System.out.println("Digite a qualificaÃ§Ã£o da enfermeira: ");
                 qualification = scanner.nextLine();
                 System.out.println("Digite o COREN da enfermeira: ");
                 coren = scanner.nextLine();
@@ -42,7 +42,7 @@ public class NurseController {
                 System.out.println("Digite o COREN da enfermeira: ");
                 coren = scanner.nextLine();
                 System.out.println("Qual atributo deseja modificar?");
-                System.out.println("1- Qualificação    2- COREN");
+                System.out.println("1- QualificaÃ§Ã£o    2- COREN");
 
                 int attributeNumber = scanner.nextInt();
                 scanner.nextLine();
