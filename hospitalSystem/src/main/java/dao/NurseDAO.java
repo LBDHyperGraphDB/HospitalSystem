@@ -49,7 +49,12 @@ public class NurseDAO {
                 System.out.println("------------------------------");
 
                 for (Nurse nurse : nurses) {
+                    System.out.println("CPF: " + nurse.getPersonCpf());
                     System.out.println("Nome: " + nurse.getPersonName());
+                    System.out.println("Endereço: " + nurse.getPersonAddress());
+                    System.out.println("Gênero: " + nurse.getPersonGender());
+                    System.out.println("Telefone: " + nurse.getPersonPhoneNumber());
+                    System.out.println("Email: " + nurse.getPersonEmail());
                     System.out.println("Qualificaão: " + nurse.getNurseQualification());
                     System.out.println("COREN: " + nurse.getNurseCoren());
 
