@@ -2,15 +2,18 @@ package view;
 
 import java.util.Scanner;
 
+import org.hypergraphdb.HyperGraph;
+
+import controller.DoctorController;
 import controller.LaboratoryController;
 import controller.MedicalExamController;
+import controller.NurseController;
 import controller.NurseryController;
+import controller.PatientController;
 import controller.WingOfBuildingController;
 
-import org.hypergraphdb.HyperGraph;
-import model.Hospital;
 import dao.HospitalDAO;
-import view.Menu;
+import model.Hospital;
 
 public class HospitalSystem {
 	public static void main(String[] args) {
@@ -126,32 +129,49 @@ public class HospitalSystem {
 							}
 							break;
 						// Doctors
-						case 7:
-							view.clear();
-							menu.crudMenu("Médicos");
-							int doctorOption = scanner.nextInt();
-							scanner.nextLine();
-							// TODO: Controller of doctor
-							// doctorController.chooseAction(doctorOption);
-							break;
-						// Nurses
-						case 8:
-							view.clear();
-							menu.crudMenu("Enfermeiros");
-							int nurseOption = scanner.nextInt();
-							scanner.nextLine();
-							// TODO: Controller of nurse
-							// nurseController.chooseAction(nurseOption);
-							break;
-						// Patients
-						case 9:
-							view.clear();
-							menu.crudMenu("Pacientes");
-							int patientOption = scanner.nextInt();
-							scanner.nextLine();
-							// TODO: Controller of patient
-							// patientController.chooseAction(patientOption);
-							break;
+	                    case 7:
+	                        view.clear();
+	                        menu.crudMenu("Médicos");
+	                        int doctorOption = scanner.nextInt();
+	                        scanner.nextLine();
+
+	                        DoctorController doctorController = new DoctorController(hospitalGraph);
+	                        if (doctorOption != 5) {
+	                            doctorController.chooseAction(doctorOption);
+	                        } else {
+	                            option = view.backToMainMenu(view, menu, scanner);
+	                        }
+	                        break;
+
+	                    // Nurses
+	                    case 8:
+	                        view.clear();
+	                        menu.crudMenu("Enfermeiros");
+	                        int nurseOption = scanner.nextInt();
+	                        scanner.nextLine();
+
+	                        NurseController nurseController = new NurseController(hospitalGraph);
+	                        if (nurseOption != 5) {
+	                            nurseController.chooseAction(nurseOption);
+	                        } else {
+	                            option = view.backToMainMenu(view, menu, scanner);
+	                        }
+
+	                        break;
+	                    // Patients
+	                    case 9:
+	                        view.clear();
+	                        menu.crudMenu("Pacientes");
+	                        int patientOption = scanner.nextInt();
+	                        scanner.nextLine();
+	                        PatientController patientController = new PatientController(hospitalGraph);
+	                        if (patientOption != 5) {
+	                            patientController.chooseAction(patientOption);
+	                        } else {
+	                            option = view.backToMainMenu(view, menu, scanner);
+
+	                        }
+	                        break;
 						// About the hospital
 						case 10:
 							view.clear();
@@ -181,18 +201,19 @@ public class HospitalSystem {
 		   hospitalGraph.close();
 		}
 	}
-	
-	public int backToMainMenu(HospitalSystem view, Menu menu, Scanner scanner) {
-		view.clear();
-		menu.mainMenu();
-		int option = scanner.nextInt();
-		scanner.nextLine();
-		
-		return option;
-	}
-	
-	public void clear() {
-		for (int i = 0; i < 3; i++) 
-			System.out.println();
-	}
+
+    public int backToMainMenu(HospitalSystem view, Menu menu, Scanner scanner) {
+        view.clear();
+        menu.mainMenu();
+        int option = scanner.nextInt();
+        scanner.nextLine();
+
+        return option;
+    }
+
+    public void clear() {
+        for (int i = 0; i < 3; i++) {
+            System.out.println();
+        }
+    }
 }

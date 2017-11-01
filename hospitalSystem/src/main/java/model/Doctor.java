@@ -1,75 +1,82 @@
 package model;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
 public class Doctor extends Person {
-	private String doctorCrm;
-	private String doctorTitration;
-	private String doctorMaritalState;
-	private String doctorMotherName;
-	private String doctorFatherName;
-	
-	public Doctor() {
-		
-	}
+    private String doctorCrm;
+    private String doctorTitration;
+    private String doctorMaritalState;
+    private String doctorMotherName;
+    private String doctorFatherName;
 
-	public Doctor(String personCpf, String personName, String personAddress, String personGender,
-			String personPhoneNumber, String personEmail, Date personBithDate, String doctorCrm,
-			String doctorTitration, String doctorMaritalState, String doctorMotherName, 
-			String doctorFatherName) {
-		super(personCpf, personName, personAddress, personGender, personPhoneNumber, personEmail, personBithDate);
-		this.doctorCrm = doctorCrm;
-		this.doctorTitration = doctorTitration;
-		this.doctorMaritalState = doctorMaritalState;
-		this.doctorMotherName = doctorMotherName;
-		this.doctorFatherName = doctorFatherName;
-	}
+    public Doctor() {
 
-	public Doctor(String doctorCrm, String doctorTitration, String doctorMaritalState, String doctorMotherName, String doctorFatherName) {
-		this.doctorCrm = doctorCrm;
-		this.doctorTitration = doctorTitration;
-		this.doctorMaritalState = doctorMaritalState;
-		this.doctorMotherName = doctorMotherName;
-		this.doctorFatherName = doctorFatherName;
-	}
+    }
 
-	public String getDoctorCrm() {
-		return doctorCrm;
-	}
+    public Doctor(String personCpf, String personName, String personAddress, String personGender,
+            String personPhoneNumber, String personEmail, Date personBithDate, String doctorCrm,
+            String doctorTitration, String doctorMaritalState, String doctorMotherName,
+            String doctorFatherName) {
+        super(personCpf, personName, personAddress, personGender, personPhoneNumber, personEmail, personBithDate);
+        this.doctorCrm = doctorCrm;
+        this.doctorTitration = doctorTitration;
+        this.doctorMaritalState = doctorMaritalState;
+        this.doctorMotherName = doctorMotherName;
+        this.doctorFatherName = doctorFatherName;
+    }
 
-	public void setDoctorCrm(String doctorCrm) {
-		this.doctorCrm = doctorCrm;
-	}
+    public Doctor(String doctorCrm, String doctorTitration, String doctorMaritalState, String doctorMotherName,
+            String doctorFatherName) {
+        this.doctorCrm = doctorCrm;
+        this.doctorTitration = doctorTitration;
+        this.doctorMaritalState = doctorMaritalState;
+        this.doctorMotherName = doctorMotherName;
+        this.doctorFatherName = doctorFatherName;
+    }
 
-	public String getDoctorTitration() {
-		return doctorTitration;
-	}
+    public String getDoctorCrm() {
+        return doctorCrm;
+    }
 
-	public void setDoctorTitration(String doctorTitration) {
-		this.doctorTitration = doctorTitration;
-	}
+    public void setDoctorCrm(String doctorCrm) {
+        this.doctorCrm = doctorCrm;
+    }
 
-	public String getDoctorMaritalState() {
-		return doctorMaritalState;
-	}
+    public String getDoctorTitration() {
+        return doctorTitration;
+    }
 
-	public void setDoctorMaritalState(String doctorMaritalState) {
-		this.doctorMaritalState = doctorMaritalState;
-	}
+    public void setDoctorTitration(String doctorTitration) {
+        this.doctorTitration = doctorTitration;
+    }
 
-	public String getDoctorMotherName() {
-		return doctorMotherName;
-	}
+    public String getDoctorMaritalState() {
+        return doctorMaritalState;
+    }
 
-	public void setDoctorMotherName(String doctorMotherName) {
-		this.doctorMotherName = doctorMotherName;
-	}
+    public void setDoctorMaritalState(String doctorMaritalState) {
+        this.doctorMaritalState = doctorMaritalState;
+    }
 
-	public String getDoctorFatherName() {
-		return doctorFatherName;
-	}
+    public String getDoctorMotherName() {
+        return doctorMotherName;
+    }
 
-	public void setDoctorFatherName(String doctorFatherName) {
-		this.doctorFatherName = doctorFatherName;
-	}
+    public void setDoctorMotherName(String doctorMotherName) {
+        this.doctorMotherName = doctorMotherName;
+    }
+
+    public String getDoctorFatherName() {
+        return doctorFatherName;
+    }
+
+    public void setDoctorFatherName(String doctorFatherName) {
+        this.doctorFatherName = doctorFatherName;
+    }
+
+    public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
+        Field field = getClass().getDeclaredField(fieldName);
+        field.set(this, value);
+    }
 }
