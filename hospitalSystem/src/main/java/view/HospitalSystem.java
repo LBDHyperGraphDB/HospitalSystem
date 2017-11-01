@@ -130,19 +130,22 @@ public class HospitalSystem {
 							break;
 						// Doctors
 	                    case 7:
-	                        view.clear();
-	                        menu.crudMenu("Médicos");
-	                        int doctorOption = scanner.nextInt();
-	                        scanner.nextLine();
-
-	                        DoctorController doctorController = new DoctorController(hospitalGraph);
-	                        if (doctorOption != 5) {
-	                            doctorController.chooseAction(doctorOption);
-	                        } else {
-	                            option = view.backToMainMenu(view, menu, scanner);
-	                        }
-	                        break;
-
+	                    	view.clear();
+							menu.crudMenu("Médicos");
+							int doctorOption = scanner.nextInt();
+							scanner.nextLine();
+							
+							DoctorController doctorController = new DoctorController(hospitalGraph);
+							if(doctorOption != 5) {
+								doctorController.chooseAction(doctorOption);
+							} else {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
+							
+							if(doctorController.getOption() == 5) {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
+							break;
 	                    // Nurses
 	                    case 8:
 	                        view.clear();
@@ -156,6 +159,10 @@ public class HospitalSystem {
 	                        } else {
 	                            option = view.backToMainMenu(view, menu, scanner);
 	                        }
+	                        
+	                        if(nurseController.getOption() == 5) {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
 
 	                        break;
 	                    // Patients
@@ -169,8 +176,11 @@ public class HospitalSystem {
 	                            patientController.chooseAction(patientOption);
 	                        } else {
 	                            option = view.backToMainMenu(view, menu, scanner);
-
 	                        }
+	                        
+	                        if(patientController.getOption() == 5) {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
 	                        break;
 						// About the hospital
 						case 10:
