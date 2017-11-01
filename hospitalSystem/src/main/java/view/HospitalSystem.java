@@ -74,6 +74,7 @@ public class HospitalSystem {
 							if(nursery.getOption() == 5) {
 								option = view.backToMainMenu(view, menu, scanner);
 							}
+							break;
 						// Laboratories
 						case 3:
 							view.clear();
