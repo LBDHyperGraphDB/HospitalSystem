@@ -1,15 +1,17 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class Nursery {
 	private int nurseryCode;
 	private String nurseryDescription;
-	private String nurseryWingOfBuilding;
+	private int nurseryWingOfBuilding;
 	
 	public Nursery() {
 		
 	}
 
-	public Nursery(int nurseryCode, String nurseryDescription, String nurseryWingOfBuilding) {
+	public Nursery(int nurseryCode, String nurseryDescription, int nurseryWingOfBuilding) {
 		this.nurseryCode = nurseryCode;
 		this.nurseryDescription = nurseryDescription;
 		this.nurseryWingOfBuilding = nurseryWingOfBuilding;
@@ -31,11 +33,16 @@ public class Nursery {
 		this.nurseryDescription = nurseryDescription;
 	}
 
-	public String getNurseryWingOfBuilding() {
+	public int getNurseryWingOfBuilding() {
 		return nurseryWingOfBuilding;
 	}
 
-	public void setNurseryWingOfBuilding(String nurseryWingOfBuilding) {
+	public void setNurseryWingOfBuilding(int nurseryWingOfBuilding) {
 		this.nurseryWingOfBuilding = nurseryWingOfBuilding;
 	}	
+	
+	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
+	    Field field = getClass().getDeclaredField(fieldName);
+	    field.set(this, value);
+	}
 }
