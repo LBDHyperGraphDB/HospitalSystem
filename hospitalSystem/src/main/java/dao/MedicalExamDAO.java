@@ -29,7 +29,7 @@ public class MedicalExamDAO {
 				return false;
 			}
 		} catch(Throwable t) {
-			System.out.println("[ERRO]: O Laboratório " + medicalExam.getExamDescription() + " não pôde ser adicionado.");
+			System.out.println("[ERRO]: O Exame " + medicalExam.getExamDescription() + " não pôde ser adicionado.");
 		    t.printStackTrace();
 		    return false;
 		} finally {

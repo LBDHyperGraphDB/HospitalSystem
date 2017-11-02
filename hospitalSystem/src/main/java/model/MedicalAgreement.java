@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class MedicalAgreement {
 	private int agreementCode;
 	private String agreementDescription;
@@ -48,5 +50,10 @@ public class MedicalAgreement {
 
 	public void setAgreementType(String agreementType) {
 		this.agreementType = agreementType;
+	}
+	
+	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
+	    Field field = getClass().getDeclaredField(fieldName);
+	    field.set(this, value);    
 	}
 }
