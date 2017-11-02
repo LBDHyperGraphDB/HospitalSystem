@@ -6,6 +6,7 @@ import org.hypergraphdb.HyperGraph;
 
 import controller.DoctorController;
 import controller.LaboratoryController;
+import controller.MedicalAgreementController;
 import controller.MedicalExamController;
 import controller.NurseController;
 import controller.NurseryController;
@@ -97,10 +98,19 @@ public class HospitalSystem {
 						case 4:
 							view.clear();
 							menu.crudMenu("Convênios");
-							int medicalAgreementOption = scanner.nextInt();
+							int agreementOption = scanner.nextInt();
 							scanner.nextLine();
-							// TODO: Controller of medicalAgreement
-							// medicalAgreementController.chooseAction(medicalAgreementOption);
+							
+							MedicalAgreementController medicalAgreementController = new MedicalAgreementController(hospitalGraph);
+							if(agreementOption != 5) {
+								medicalAgreementController.chooseAction(agreementOption);
+							} else {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
+							
+							if(medicalAgreementController.getOption() == 5) {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
 							break;
 						// Medical Equipments
 						case 5:
