@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class MedicalEquipment {
 	private int equipmentCode;
 	private String equipmentDescription;
@@ -37,5 +39,10 @@ public class MedicalEquipment {
 
 	public void setEquipmentManufacturer(String equipmentManufacturer) {
 		this.equipmentManufacturer = equipmentManufacturer;
+	}
+	
+	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
+	    Field field = getClass().getDeclaredField(fieldName);
+	    field.set(this, value);    
 	}
 }

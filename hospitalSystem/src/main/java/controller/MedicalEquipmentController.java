@@ -4,54 +4,50 @@ import java.util.Scanner;
 
 import org.hypergraphdb.HyperGraph;
 
-import dao.MedicalAgreementDAO;
-import model.MedicalAgreement;
-
+import dao.MedicalEquipmentDAO;
+import model.MedicalEquipment;
 import view.Menu;
 
-public class MedicalAgreementController {
+public class MedicalEquipmentController {
+
 	Menu menu = new Menu();
-	MedicalAgreementDAO medicalAgreementDAO = null;
+	MedicalEquipmentDAO medicalEquipmentDAO = null;
 	Scanner scanner = new Scanner(System.in);
 	
 	private int code;
 	private String description;
-	private double value;
-	private String type;
+	private String manufacturer;
 	private int option;
 	
-	public MedicalAgreementController(HyperGraph hospitalGraph) {
-		this.medicalAgreementDAO = new MedicalAgreementDAO(hospitalGraph);
+	public MedicalEquipmentController(HyperGraph hospitalGraph) {
+		this.medicalEquipmentDAO = new MedicalEquipmentDAO(hospitalGraph);
 	}
 	
 	public void chooseAction (int option) {
 		do {
 			switch(option) {
 				case 1:
-					System.out.println("Digite o código do convênio: ");
+					System.out.println("Digite o código do equipamento: ");
 					code = scanner.nextInt();
 					scanner.nextLine();
-					System.out.println("Digite a descrição do convênio: ");
+					System.out.println("Digite a descrição do equipamento: ");
 					description = scanner.nextLine();
-					System.out.println("Digite o valor do convênio: ");
-					value = scanner.nextDouble();
-					scanner.nextLine();
-					System.out.println("Digite o tipo do convênio: ");
-					type = scanner.nextLine();
+					System.out.println("Digite o a manufatura do equipamento: ");
+					manufacturer = scanner.nextLine();
 					
-					MedicalAgreement medicalAgreement = new MedicalAgreement(code, description, value, type);
-					medicalAgreementDAO.addMedicalAgreement(medicalAgreement);
+					MedicalEquipment medicalEquipment = new MedicalEquipment(code, description, manufacturer);
+					medicalEquipmentDAO.addMedicalEquipment(medicalEquipment);
 					
-					menu.crudMenu("Convênios");
+					menu.crudMenu("Equipamentos");
 					option = scanner.nextInt();
 					scanner.nextLine();
 					break;
 				case 2:
-					System.out.println("Digite o código do convênio: ");
+					System.out.println("Digite o código do equipamento: ");
 					code = scanner.nextInt();
 					scanner.nextLine();
 					System.out.println("Qual atributo deseja modificar?");
-					System.out.println("1- Descrição    2- Valor	3- Tipo");
+					System.out.println("1- Descrição    2- Manufatura");
 					
 					int attributeNumber = scanner.nextInt();
 					scanner.nextLine();
@@ -59,34 +55,31 @@ public class MedicalAgreementController {
 					String attribute = "";
 					String attributeName = "";
 					if(attributeNumber == 1) {
-						attribute = "agreementDescription";
+						attribute = "equipmentDescription";
 						attributeName = "Descrição";
 					} else if(attributeNumber == 2) {
-						attribute = "agreementValue";
-						attributeName = "Valor";
-					} else if(attributeNumber == 3) {
-						attribute = "agreementType";
-						attributeName = "Tipo";
+						attribute = "equipmentManufacturer";
+						attributeName = "Manufatura";
 					}
 
 					
 					System.out.println("Digite o novo valor para " + attributeName + ": ");
 					String value = scanner.nextLine();
-					medicalAgreementDAO.updateMedicalAgreement(code, attribute, value);
+					medicalEquipmentDAO.updateMedicalEquipment(code, attribute, value);
 					
-					menu.crudMenu("Convênios");
+					menu.crudMenu("Equipamentos");
 					option = scanner.nextInt();
 					scanner.nextLine();
 					break;
 					
 				case 3:
-					medicalAgreementDAO.getAllMedicalAgreements();
+					medicalEquipmentDAO.getAllMedicalEquipments();
 					System.out.println("Deseja voltar ao menu (Sim / Não)?");
 					String back = scanner.nextLine();
 					
 					if(menu.backToMenu(back)) {
 						this.clear();
-						menu.crudMenu("Convênios");
+						menu.crudMenu("Equipamentos");
 						option = scanner.nextInt();
 						scanner.nextLine();
 					} else {
@@ -94,13 +87,13 @@ public class MedicalAgreementController {
 					}
 					break;
 				case 4:
-					System.out.println("Digite o código do convênio: ");
+					System.out.println("Digite o código do equipamento: ");
 					code = scanner.nextInt();
 					scanner.nextLine();
 					
-					medicalAgreementDAO.deleteMedicalAgreement(code);
+					medicalEquipmentDAO.deleteMedicalEquipment(code);
 					
-					menu.crudMenu("Convênios");
+					menu.crudMenu("Equipamentos");
 					option = scanner.nextInt();
 					scanner.nextLine();
 					break;
