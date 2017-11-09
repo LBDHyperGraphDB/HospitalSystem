@@ -29,7 +29,8 @@ public class Menu {
         System.out.println("8. Enfermeiros");
         System.out.println("9. Pacientes");
         System.out.println("10. Sobre o hospital");
-        System.out.println("11. Sair");
+        System.out.println("11. Relatórios");
+        System.out.println("12. Sair");
         System.out.println("------------------------------");
         System.out.println("Digite a opção desejada:");
     }
@@ -43,5 +44,11 @@ public class Menu {
         System.out.println("5. Voltar");
         System.out.println("------------------------------");
         System.out.println("Digite a opção desejada:");
+    }
+    
+    public void reportsMenu(String title) {
+    	this.menuTitle(title);
+    	System.out.println("1. Relação de Médicos e Enfermeiros");
+    	System.out.println("6. Voltar");
     }
 }

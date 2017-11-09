@@ -12,6 +12,7 @@ import controller.MedicalExamController;
 import controller.NurseController;
 import controller.NurseryController;
 import controller.PatientController;
+import controller.ReportsController;
 import controller.WingOfBuildingController;
 
 import dao.HospitalDAO;
@@ -217,12 +218,29 @@ public class HospitalSystem {
 							}
 							break;
 						case 11:
+							view.clear();
+							menu.reportsMenu("Relatórios");
+							int reportsOption = scanner.nextInt();
+							scanner.nextLine();
+							ReportsController reportsController = new ReportsController(hospitalGraph);
+							if(reportsOption != 6) {
+								reportsController.chooseAction(reportsOption);
+							} else {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
+							
+							if(reportsController.getOption() == 6) {
+								option = view.backToMainMenu(view, menu, scanner);
+							}
+							break;
+							
+						case 12:
 							break;
 						default:
-						option = 11;
+						option = 12;
 						break;
 					}
-				} while (option != 11);
+				} while (option != 12);
 				view.clear();
 				System.out.println("Fim da execução.");
 			}
