@@ -22,14 +22,14 @@ public class NurseDAO {
             // Avoid duplication: do not add if COREN exists.
             if (!this.findNurseByCoren(hospitalGraph, nurse.getNurseCoren())) {
                 hospitalGraph.add(nurse);
-                System.out.println("[SUCESSO] Enfermeira adicionada com sucesso!");
+                System.out.println("[SUCESSO] Enfermeiro adicionado com sucesso!");
                 return true;
             } else {
                 System.out.println("[ERRO]: O COREN " + nurse.getNurseCoren() + " já existe.");
                 return true;
             }
         } catch (Throwable t) {
-            System.out.println("[ERRO]: A Enfermeira " + nurse.getPersonName() + " não pôde ser adicionado.");
+            System.out.println("[ERRO]: O enfermeiro " + nurse.getPersonName() + " não pôde ser adicionado.");
             t.printStackTrace();
             return false;
         } finally {
@@ -45,23 +45,22 @@ public class NurseDAO {
             System.out.println();
             if (nurses.size() > 0) {
                 System.out.println("------------------------------");
-                System.out.println("         ENFERMEIRAS         ");
+                System.out.println("          ENFERMEIROS         ");
                 System.out.println("------------------------------");
 
                 for (Nurse nurse : nurses) {
                     System.out.println("CPF: " + nurse.getPersonCpf());
                     System.out.println("Nome: " + nurse.getPersonName());
                     System.out.println("Endereço: " + nurse.getPersonAddress());
-                    System.out.println("Gênero: " + nurse.getPersonGender());
                     System.out.println("Telefone: " + nurse.getPersonPhoneNumber());
-                    System.out.println("Email: " + nurse.getPersonEmail());
-                    System.out.println("Qualificaão: " + nurse.getNurseQualification());
+                    System.out.println("E-mail: " + nurse.getPersonEmail());
+                    System.out.println("Formação: " + nurse.getNurseQualification());
                     System.out.println("COREN: " + nurse.getNurseCoren());
 
                     System.out.println("------------------------------");
                 }
             } else {
-                System.out.print("Não há enfermeiras cadastradas.");
+                System.out.print("Não há enfermeiros cadastrados.");
             }
             System.out.println();
         } catch (Throwable t) {
@@ -96,13 +95,13 @@ public class NurseDAO {
 
                 nurse.setField(attribute, value);
                 hospitalGraph.update(nurse);
-                System.out.println("[SUCESSO] Enfermeira atualizada com sucesso!");
+                System.out.println("[SUCESSO] Enfermeiro atualizado com sucesso!");
                 return true;
             } else {
                 return false;
             }
         } catch (Throwable t) {
-            System.out.println("[ERRO]: A enfermeira de COREN " + coren + " não pôde ser atualizado.");
+            System.out.println("[ERRO]: O enfermeiro de COREN " + coren + " não pôde ser atualizado.");
             t.printStackTrace();
             return false;
         } finally {
@@ -120,14 +119,14 @@ public class NurseDAO {
                 HGHandle nurseHandle = hospitalGraph.getHandle(nurse);
                 hospitalGraph.remove(nurseHandle);
 
-                System.out.println("[SUCESSO] Enfermeira excluida com sucesso!");
+                System.out.println("[SUCESSO] Enfermeiro excluído com sucesso!");
                 return true;
             } else {
                 return false;
             }
 
         } catch (Throwable t) {
-            System.out.println("[ERRO]: A enfermeira de Coren " + coren + " não pode ser excluída.");
+            System.out.println("[ERRO]: O enfermeiro de Coren " + coren + " não pode ser excluído.");
             t.printStackTrace();
             return false;
         } finally {

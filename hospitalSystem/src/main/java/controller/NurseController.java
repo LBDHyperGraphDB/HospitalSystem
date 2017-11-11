@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,9 +23,10 @@ public class NurseController {
     private String gender;
     private String phoneNumber;
     private String email;
-    private Date bithDate;
+    private String bithDate;
     private String qualification;
     private String coren;
+    private Date date;
     private int option;
 
     public NurseController(HyperGraph hospitalGraph) {
@@ -34,38 +37,44 @@ public class NurseController {
         do {
             switch (option) {
             case 1:
-                System.out.println("Digite o CPF da enfermeira: ");
+                System.out.println("Digite o CPF do enfermeiro: ");
                 cpf = scanner.nextLine();
-                System.out.println("Digite o nome da enfermeira: ");
+                System.out.println("Digite o nome do enfermeiro: ");
                 name = scanner.nextLine();
-                System.out.println("Digite o endereço da enfermeira: ");
+                System.out.println("Digite o endereço do enfermeiro: ");
                 address = scanner.nextLine();
-                System.out.println("Digite o genero da enfermeira: ");
+                System.out.println("Digite o gênero do enfermeiro: ");
                 gender = scanner.nextLine();
-                System.out.println("Digite o telefone da enfermeira: ");
+                System.out.println("Digite o telefone do enfermeiro: ");
                 phoneNumber = scanner.nextLine();
-                System.out.println("Digite o email da enfermeira: ");
+                System.out.println("Digite o e-mail do enfermeiro: ");
                 email = scanner.nextLine();
-                System.out.println("Digite data de nascimento da enfermeira: ");
-                bithDate = new Date();
-                System.out.println("Digite a qualificação da enfermeira: ");
+                System.out.println("Digite data de nascimento do enfermeiro: ");
+                bithDate = scanner.nextLine();
+                DateFormat dateFormat = DateFormat.getInstance();
+                    try {
+                        date = dateFormat.parse(bithDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                System.out.println("Digite a formação do enfermeiro: ");
                 qualification = scanner.nextLine();
-                System.out.println("Digite o COREN da enfermeira: ");
+                System.out.println("Digite o COREN do enfermeiro: ");
                 coren = scanner.nextLine();
 
-                Nurse nurse = new Nurse(cpf, name, address, gender, phoneNumber, email, bithDate, qualification, coren);
+                Nurse nurse = new Nurse(cpf, name, address, gender, phoneNumber, email, date, qualification, coren);
                 nurseDAO.addNurse(nurse);
 
-                menu.crudMenu("Enfermeira");
+                menu.crudMenu("Enfermeiro");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
             case 2:
-                System.out.println("Digite o COREN da enfermeira: ");
+                System.out.println("Digite o COREN do enfermeiro: ");
                 coren = scanner.nextLine();
                 System.out.println("Qual atributo deseja modificar?");
-                System.out.println(
-                        "1- CPF    2- Nome    3- Endereço    4- Genero    5- Telefone    6- Email    7- Data de Nascimento     8- Qualificação    9- COREN");
+                System.out.println("1- CPF    2- Nome    3- Endereço    4- Gênero    5- Telefone");
+                System.out.println("6- E-mail    7- Data de Nascimento     8- Formação");
 
                 int attributeNumber = scanner.nextInt();
                 scanner.nextLine();
@@ -74,38 +83,35 @@ public class NurseController {
                 String attributeName = "";
                 if (attributeNumber == 1) {
                     attribute = "personCpf";
-                    attributeName = "cpf";
+                    attributeName = "CPF";
                 } else if (attributeNumber == 2) {
                     attribute = "personName";
-                    attributeName = "name";
+                    attributeName = "nome";
                 } else if (attributeNumber == 3) {
                     attribute = "personAddress";
-                    attributeName = "address";
+                    attributeName = "endereço";
                 } else if (attributeNumber == 4) {
                     attribute = "personGender";
-                    attributeName = "gender";
+                    attributeName = "gênero";
                 } else if (attributeNumber == 5) {
                     attribute = "personPhoneNumber";
-                    attributeName = "phoneNumber";
+                    attributeName = "telefone";
                 } else if (attributeNumber == 6) {
                     attribute = "personEmail";
-                    attributeName = "email";
+                    attributeName = "e-mail";
                 } else if (attributeNumber == 7) {
                     attribute = "personBithDate";
-                    attributeName = "bithDate";
+                    attributeName = "data de nascimento";
                 } else if (attributeNumber == 8) {
                     attribute = "nurseQualification";
-                    attributeName = "qualification";
-                } else if (attributeNumber == 9) {
-                    attribute = "nurseCoren";
-                    attributeName = "coren";
-
+                    attributeName = "formação";
                 }
+                
                 System.out.println("Digite o novo valor para " + attributeName + ": ");
                 String value = scanner.nextLine();
                 nurseDAO.updateNurse(coren, attribute, value);
 
-                menu.crudMenu("Enfermeira");
+                menu.crudMenu("Enfermeiro");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -116,7 +122,7 @@ public class NurseController {
 
                 if (menu.backToMenu(back)) {
                     this.clear();
-                    menu.crudMenu("Enfermeiras");
+                    menu.crudMenu("Enfermeiros");
                     option = scanner.nextInt();
                     scanner.nextLine();
                 } else {
@@ -124,12 +130,12 @@ public class NurseController {
                 }
                 break;
             case 4:
-                System.out.println("Digite o COREN da enfermeira: ");
+                System.out.println("Digite o COREN do enfermeiro: ");
                 coren = scanner.nextLine();
 
                 nurseDAO.deleteNurse(coren);
 
-                menu.crudMenu("Enfermeira");
+                menu.crudMenu("Enfermeiro");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -141,7 +147,7 @@ public class NurseController {
                 this.clear();
                 System.out.println("Opção inválida! Tente novamente");
 
-                menu.crudMenu("Enfermeira");
+                menu.crudMenu("Enfermeiro");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;

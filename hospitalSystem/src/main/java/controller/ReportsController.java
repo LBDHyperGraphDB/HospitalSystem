@@ -25,7 +25,7 @@ public class ReportsController {
 		do {
 			switch (option) {
 	        	case 1:
-	        		menu.menuTitle("Relação de médicos e enfermeiros");
+	        		menu.menuTitle("Médicos e Enfermeiros");
 	        		doctorDAO.getAllDoctors();
 	        		nurseDAO.getAllNurses();
 	        		

@@ -1,5 +1,7 @@
 package controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -19,12 +21,13 @@ public class DoctorController {
     private String gender;
     private String phoneNumber;
     private String email;
-    private Date bithDate;
+    private String bithDate;
     private String crm;
     private String titration;
     private String maritalState;
     private String motherName;
     private String fatherName;
+    private Date date;
     private int option;
 
     public DoctorController(HyperGraph hospitalGraph) {
@@ -41,14 +44,20 @@ public class DoctorController {
                 name = scanner.nextLine();
                 System.out.println("Digite o endereço do médico: ");
                 address = scanner.nextLine();
-                System.out.println("Digite o genero do médico: ");
+                System.out.println("Digite o gênero do médico: ");
                 gender = scanner.nextLine();
                 System.out.println("Digite o telefone do médico: ");
                 phoneNumber = scanner.nextLine();
-                System.out.println("Digite o email do médico: ");
+                System.out.println("Digite o e-mail do médico: ");
                 email = scanner.nextLine();
                 System.out.println("Digite data de nascimento do médico: ");
-                bithDate = new Date();
+                bithDate = scanner.nextLine();
+                DateFormat dateFormat = DateFormat.getInstance();
+                    try {
+                        date = dateFormat.parse(bithDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 System.out.println("Digite o CRM do médico: ");
                 crm = scanner.nextLine();
                 System.out.println("Digite o titulação do médico: ");
@@ -60,11 +69,11 @@ public class DoctorController {
                 System.out.println("Digite o nome do pai do médico: ");
                 fatherName = scanner.nextLine();
 
-                Doctor doctor = new Doctor(cpf, name, address, gender, phoneNumber, email, bithDate, crm, titration, maritalState,
+                Doctor doctor = new Doctor(cpf, name, address, gender, phoneNumber, email, date, crm, titration, maritalState,
                         motherName, fatherName);
                 doctorDAO.addDoctor(doctor);
 
-                menu.crudMenu("médico");
+                menu.crudMenu("Médico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -72,10 +81,10 @@ public class DoctorController {
                 System.out.println("Digite o CRM do médico: ");
                 crm = scanner.nextLine();
                 System.out.println("Qual atributo deseja modificar?");
-                System.out.println(
-                        "1- CPF    2- Nome    3- Endereço    4- Genero    5- Telefone    6- Email    7- Data de Nascimento" +
-                                "    8- Crm    9- Titulação    10- Estado Civil    11- Nome da mãe    12- Nome do pai ");
-
+                System.out.println("1- CPF    2- Nome    3- Endereço    4- Genero    5- Telefone");
+                System.out.println("6- E-mail    7- Data de Nascimento    8- Titulação");
+                System.out.println("9- Estado Civil    10- Nome da mãe    11- Nome do pai ");
+                
                 int attributeNumber = scanner.nextInt();
                 scanner.nextLine();
 
@@ -84,47 +93,44 @@ public class DoctorController {
 
                 if (attributeNumber == 1) {
                     attribute = "personCpf";
-                    attributeName = "cpf";
+                    attributeName = "CPF";
                 } else if (attributeNumber == 2) {
                     attribute = "personName";
-                    attributeName = "name";
+                    attributeName = "nome";
                 } else if (attributeNumber == 3) {
                     attribute = "personAddress";
-                    attributeName = "address";
+                    attributeName = "endereço";
                 } else if (attributeNumber == 4) {
                     attribute = "personGender";
-                    attributeName = "gender";
+                    attributeName = "gênero";
                 } else if (attributeNumber == 5) {
                     attribute = "personPhoneNumber";
-                    attributeName = "phoneNumber";
+                    attributeName = "telefone";
                 } else if (attributeNumber == 6) {
                     attribute = "personEmail";
-                    attributeName = "email";
+                    attributeName = "e-mail";
                 } else if (attributeNumber == 7) {
                     attribute = "personBithDate";
-                    attributeName = "bithDate";
+                    attributeName = "data de nascimento";
                 } else if (attributeNumber == 8) {
-                    attribute = "doctorCrm";
-                    attributeName = "crm";
+                	attribute = "doctorTitration";
+                    attributeName = "titulação";
                 } else if (attributeNumber == 9) {
-                    attribute = "doctorTitration";
-                    attributeName = "titration";
+                	attribute = "doctorMaritalState";
+                    attributeName = "estado civil";
                 } else if (attributeNumber == 10) {
-                    attribute = "doctorMaritalState";
-                    attributeName = "maritalState";
+                	attribute = "doctorMotherName";
+                    attributeName = "nome da mãe";
                 } else if (attributeNumber == 11) {
-                    attribute = "doctorMotherName";
-                    attributeName = "motherName";
-                } else if (attributeNumber == 12) {
-                    attribute = "doctorFatherName";
-                    attributeName = "fatherName";
+                	attribute = "doctorFatherName";
+                    attributeName = "nome do pai";
                 }
 
                 System.out.println("Digite o novo valor para " + attributeName + ": ");
                 String value = scanner.nextLine();
                 doctorDAO.updateDoctor(crm, attribute, value);
 
-                menu.crudMenu("médico");
+                menu.crudMenu("Médico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -148,7 +154,7 @@ public class DoctorController {
 
                 doctorDAO.deleteDoctor(crm);
 
-                menu.crudMenu("médico");
+                menu.crudMenu("Médico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -160,7 +166,7 @@ public class DoctorController {
                 this.clear();
                 System.out.println("Opção inválida! Tente novamente");
 
-                menu.crudMenu("médico");
+                menu.crudMenu("Médico");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
