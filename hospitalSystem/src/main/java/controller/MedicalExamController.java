@@ -1,10 +1,14 @@
 package controller;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.hypergraphdb.HyperGraph;
+import org.hypergraphdb.HGQuery.hg;
 
+import dao.LaboratoryDAO;
 import dao.MedicalExamDAO;
+import model.Laboratory;
 import model.MedicalExam;
 import view.Menu;
 
@@ -12,7 +16,8 @@ public class MedicalExamController {
 	Menu menu = new Menu();
 	MedicalExamDAO medicalExamDAO = null;
 	Scanner scanner = new Scanner(System.in);
-	
+	LaboratoryDAO laboratoryDao = null;
+	private String examLaboratoryCnpj;
 	private int code;
 	private String description;
 	private String restrition;
@@ -22,9 +27,17 @@ public class MedicalExamController {
 		this.medicalExamDAO = new MedicalExamDAO(hospitalGraph);
 	}
 	
+	
+	public boolean verifyLaboratoryCreate() {
+		
+		return false;
+		
+	}
+	
 	public void chooseAction (int option) {
 		do {
 			switch(option) {
+			
 				case 1:
 					System.out.println("Digite o código do exame: ");
 					code = scanner.nextInt();
@@ -34,7 +47,7 @@ public class MedicalExamController {
 					System.out.println("Digite a restrição do exame ");
 					restrition = scanner.nextLine();
 					
-					MedicalExam medicalExam = new MedicalExam(code, description, restrition);
+					MedicalExam medicalExam = new MedicalExam(examLaboratoryCnpj, code, description, restrition);
 					medicalExamDAO.addMedicalExam(medicalExam);
 					
 					menu.crudMenu("Exame");

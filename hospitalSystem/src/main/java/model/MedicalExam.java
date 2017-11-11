@@ -3,19 +3,30 @@ package model;
 import java.lang.reflect.Field;
 
 public class MedicalExam {
+	private String examLaboratoryCnpj;
+
 	private int examCode;
 	private String examDescription;
 	private String examRestriction;
-	
+
 	public MedicalExam() {
-		
+
 	}
 
-	public MedicalExam(int examCode, String examDescription, String examRestriction) {
+	public MedicalExam(String examLaboratoryCnpj, int examCode, String examDescription, String examRestriction) {
 		super();
+		this.examLaboratoryCnpj = examLaboratoryCnpj;
 		this.examCode = examCode;
 		this.examDescription = examDescription;
 		this.examRestriction = examRestriction;
+	}
+
+	public String getExamLaboratoryCnpj() {
+		return examLaboratoryCnpj;
+	}
+
+	public void setExamLaboratoryCnpj(String examLaboratoryCnpj) {
+		this.examLaboratoryCnpj = examLaboratoryCnpj;
 	}
 
 	public int getExamCode() {
@@ -41,9 +52,9 @@ public class MedicalExam {
 	public void setExamRestriction(String examRestriction) {
 		this.examRestriction = examRestriction;
 	}
-	
+
 	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
-	    Field field = getClass().getDeclaredField(fieldName);
-	    field.set(this, value);    
+		Field field = getClass().getDeclaredField(fieldName);
+		field.set(this, value);
 	}
 }

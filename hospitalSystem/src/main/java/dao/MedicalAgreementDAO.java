@@ -21,7 +21,7 @@ public class MedicalAgreementDAO {
 			hospitalGraph = new HyperGraph(databaseLocation);
 			if (!this.findMedicalAgreementByCode(hospitalGraph, medicalAgreement.getAgreementCode())) {
 				hospitalGraph.add(medicalAgreement);
-				System.out.println("[SUCESSO] Exame médico adicionado com sucesso!");
+				System.out.println("[SUCESSO] Conv�nio adicionado com sucesso!");
 				return true;
 			}else {
 				System.out.println("[ERRO] O código" + medicalAgreement.getAgreementCode() + "já existe");

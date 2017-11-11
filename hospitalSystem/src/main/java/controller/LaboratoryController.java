@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.hypergraphdb.HyperGraph;
@@ -17,6 +18,7 @@ public class LaboratoryController {
 	private String description;
 	private String address;
 	private String phoneNumber;
+	private List examList;
 	private int option;
 	
 	public LaboratoryController(HyperGraph hospitalGraph) {
@@ -36,7 +38,7 @@ public class LaboratoryController {
 					System.out.println("Digite o telefone do laboratório: ");
 					phoneNumber = scanner.nextLine();
 					
-					Laboratory laboratory = new Laboratory(cnpj, description, address, phoneNumber);
+					Laboratory laboratory = new Laboratory(cnpj, description, address, phoneNumber, null);
 					laboratoryDAO.addLaboratory(laboratory);
 					
 					menu.crudMenu("Laboratório");

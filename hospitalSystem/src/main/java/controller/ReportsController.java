@@ -5,6 +5,9 @@ import java.util.Scanner;
 import org.hypergraphdb.HyperGraph;
 
 import dao.DoctorDAO;
+import dao.LaboratoryDAO;
+import dao.MedicalAgreementDAO;
+import dao.MedicalExamDAO;
 import dao.NurseDAO;
 import dao.PatientDAO;
 import view.Menu;
@@ -18,6 +21,10 @@ public class ReportsController {
 	NurseDAO nurseDAO = null;
 	PatientDAO patientDAO = null;
 	
+	MedicalAgreementDAO medicalAgreementDAO = null; 
+	LaboratoryDAO laboratoryDAO = null;
+	MedicalExamDAO medicalExamDAO = null;
+
 	private int option;
 	private String back;
 	
@@ -26,6 +33,9 @@ public class ReportsController {
 		this.doctorDAO = new DoctorDAO(hospitalGraph);
 		this.nurseDAO = new NurseDAO(hospitalGraph);
 		this.patientDAO = new PatientDAO(hospitalGraph);
+		this.medicalAgreementDAO = new MedicalAgreementDAO(hospitalGraph);
+		this.laboratoryDAO =  new LaboratoryDAO(hospitalGraph);
+		this.medicalExamDAO = new MedicalExamDAO(hospitalGraph);
     }
 	
 	public void chooseAction(int option) {
@@ -74,6 +84,40 @@ public class ReportsController {
 	                }
 	                break;
 	        		
+	        	case 4:
+	        		menu.menuTitle("Relação de todos os conv�nios do hospital");
+	        		medicalAgreementDAO.getAllMedicalAgreements();	        		
+	        		System.out.println("Deseja voltar ao menu (Sim / Não)?");
+	                String goback = scanner.nextLine();
+
+	                if (menu.backToMenu(goback)) {
+	                    this.clear();
+	                    menu.reportsMenu("Relatórios");
+	                    option = scanner.nextInt();
+	                    scanner.nextLine();
+	                } else {
+	                    option = 6;
+	                }
+	                break;
+	                
+	        	case 5:
+	        		menu.menuTitle("Relação de todos os laborat�rios do hospital e exames realizados por ele");
+	        		laboratoryDAO.getAllLaboratories();
+	        		medicalExamDAO.getAllMedicalExams();	        		
+	        		System.out.println("Deseja voltar ao menu (Sim / Não)?");
+	                String gogoback = scanner.nextLine();
+
+	                if (menu.backToMenu(gogoback)) {
+	                    this.clear();
+	                    menu.reportsMenu("Relatórios");
+	                    option = scanner.nextInt();
+	                    scanner.nextLine();
+	                } else {
+	                    option = 6;
+	                }
+	                break;
+	                
+	                
 	            default:
 	            	this.clear();
 	                System.out.println("Opção inválida! Tente novamente");
