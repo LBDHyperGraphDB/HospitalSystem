@@ -17,7 +17,7 @@ public class Nurse extends Person {
     }
 
     public Nurse(String personCpf, String personName, String personAddress, String personGender,
-            String personPhoneNumber, String personEmail, Date personBithDate,
+            String personPhoneNumber, String personEmail, String personBithDate,
             String nurseQualification, String nurseCoren) {
         super(personCpf, personName, personAddress, personGender, personPhoneNumber, personEmail, personBithDate);
         this.nurseQualification = nurseQualification;

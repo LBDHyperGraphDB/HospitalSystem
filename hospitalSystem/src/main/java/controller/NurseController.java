@@ -26,7 +26,7 @@ public class NurseController {
     private String bithDate;
     private String qualification;
     private String coren;
-    private Date date;
+    private String date;
     private int option;
 
     public NurseController(HyperGraph hospitalGraph) {
@@ -51,12 +51,6 @@ public class NurseController {
                 email = scanner.nextLine();
                 System.out.println("Digite data de nascimento do enfermeiro: ");
                 bithDate = scanner.nextLine();
-                DateFormat dateFormat = DateFormat.getInstance();
-                    try {
-                        date = dateFormat.parse(bithDate);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
                 System.out.println("Digite a formação do enfermeiro: ");
                 qualification = scanner.nextLine();
                 System.out.println("Digite o COREN do enfermeiro: ");
