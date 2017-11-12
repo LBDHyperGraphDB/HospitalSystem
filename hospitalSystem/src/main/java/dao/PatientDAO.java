@@ -133,7 +133,7 @@ public class PatientDAO {
                 HGHandle patientHandle = hospitalGraph.getHandle(patient);
                 hospitalGraph.remove(patientHandle);
 
-                System.out.println("[SUCESSO] Paciente excluida com sucesso!");
+                System.out.println("[SUCESSO] Paciente excluído com sucesso!");
                 return true;
             } else {
                 return false;

@@ -50,7 +50,7 @@ public class PatientController {
                 bithDate = new Date();
                 System.out.println("Digite o número do plano de saúde do paciente: ");
                 healthInsurance = scanner.nextLine();
-                System.out.println("Digite o CRM do médico responsável");
+                System.out.println("Digite o CRM do médico responsável: ");
                 doctorCRM = scanner.nextLine();
 
                 Patient patient = new Patient(cpf, name, address, gender, phoneNumber, email, bithDate, healthInsurance, doctorCRM);
@@ -66,6 +66,7 @@ public class PatientController {
                 System.out.println("Qual atributo deseja modificar?");
                 System.out.println("1- CPF    2- Nome    3- Endereço    4- Gênero    5- Telefone");
                 System.out.println("6- Email    7- Data de Nascimento    8- Número do Plano de Saúde");
+                System.out.println("9- Médico Responsável");
 
                 int attributeNumber = scanner.nextInt();
                 scanner.nextLine();
@@ -94,8 +95,11 @@ public class PatientController {
                     attribute = "personBithDate";
                     attributeName = "data de nascimento";
                 } else if (attributeNumber == 8) {
-                    attribute = "personHealthInsurance";
+                    attribute = "patientHealthInsurance";
                     attributeName = "número do plano de saúde";
+                } else if (attributeNumber == 9) {
+                    attribute = "patientDoctorCrm";
+                    attributeName = "médico responsável";
                 }
 
                 System.out.println("Digite o novo valor para " + attributeName + ": ");
