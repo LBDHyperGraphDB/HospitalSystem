@@ -7,6 +7,7 @@ import org.hypergraphdb.HyperGraph;
 
 import dao.LaboratoryDAO;
 import model.Laboratory;
+import model.MedicalExam;
 import view.Menu;
 
 public class LaboratoryController {
@@ -18,7 +19,7 @@ public class LaboratoryController {
 	private String description;
 	private String address;
 	private String phoneNumber;
-	private List examList;
+	private List<MedicalExam> examList;
 	private int option;
 	
 	public LaboratoryController(HyperGraph hospitalGraph) {
@@ -38,7 +39,7 @@ public class LaboratoryController {
 					System.out.println("Digite o telefone do laboratório: ");
 					phoneNumber = scanner.nextLine();
 					
-					Laboratory laboratory = new Laboratory(cnpj, description, address, phoneNumber, null);
+					Laboratory laboratory = new Laboratory(cnpj, description, address, phoneNumber);
 					laboratoryDAO.addLaboratory(laboratory);
 					
 					menu.crudMenu("Laboratório");
