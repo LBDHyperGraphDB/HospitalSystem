@@ -68,8 +68,7 @@ public class ReportsController {
 	                
 	        	case 5:
 	        		menu.menuTitle("Relação de todos os laborat�rios do hospital e exames realizados por ele");
-	        		laboratoryDAO.getAllLaboratories();
-	        		medicalExamDAO.getAllMedicalExams();	        		
+	        		laboratoryDAO.getAllLaboratoriesExams();
 	        		System.out.println("Deseja voltar ao menu (Sim / Não)?");
 	                String gogoback = scanner.nextLine();
 
