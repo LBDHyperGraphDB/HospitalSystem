@@ -54,11 +54,10 @@ public class DoctorDAO {
                     System.out.println("CPF: " + doctor.getPersonCpf());
                     System.out.println("Nome: " + doctor.getPersonName());
                     System.out.println("Endereço: " + doctor.getPersonAddress());
-                    System.out.println("Gênero: " + doctor.getPersonGender());
                     System.out.println("Telefone: " + doctor.getPersonPhoneNumber());
                     System.out.println("Email: " + doctor.getPersonEmail());
-                    System.out.println("CRM: " + doctor.getDoctorCrm());
                     System.out.println("Titulação: " + doctor.getDoctorTitration());
+                    System.out.println("CRM: " + doctor.getDoctorCrm());
 
                     System.out.println("------------------------------");
                 }
