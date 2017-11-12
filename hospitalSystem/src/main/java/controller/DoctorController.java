@@ -27,7 +27,7 @@ public class DoctorController {
     private String maritalState;
     private String motherName;
     private String fatherName;
-    private Date date;
+    private String date;
     private int option;
 
     public DoctorController(HyperGraph hospitalGraph) {
@@ -52,12 +52,6 @@ public class DoctorController {
                 email = scanner.nextLine();
                 System.out.println("Digite data de nascimento do médico: ");
                 bithDate = scanner.nextLine();
-                DateFormat dateFormat = DateFormat.getInstance();
-                    try {
-                        date = dateFormat.parse(bithDate);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
                 System.out.println("Digite o CRM do médico: ");
                 crm = scanner.nextLine();
                 System.out.println("Digite o titulação do médico: ");
