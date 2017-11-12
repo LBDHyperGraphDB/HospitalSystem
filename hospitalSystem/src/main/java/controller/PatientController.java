@@ -66,7 +66,7 @@ public class PatientController {
                 System.out.println("Qual atributo deseja modificar?");
                 System.out.println("1- CPF    2- Nome    3- Endereço    4- Gênero    5- Telefone");
                 System.out.println("6- Email    7- Data de Nascimento    8- Número do Plano de Saúde");
-                System.out.println("9- Médico Responsável");
+                System.out.println("9- Médico Responsável	10- Pedido de Exame");
 
                 int attributeNumber = scanner.nextInt();
                 scanner.nextLine();
@@ -100,15 +100,26 @@ public class PatientController {
                 } else if (attributeNumber == 9) {
                     attribute = "patientDoctorCrm";
                     attributeName = "médico responsável";
+                } else if (attributeNumber == 10) {
+                	attribute = "patientExam";
+                	attributeName = "pedido de exame";
                 }
 
-                System.out.println("Digite o novo valor para " + attributeName + ": ");
-                String value = scanner.nextLine();
-                patientDAO.updatePatient(cpf, attribute, value);
-
-                menu.crudMenu("Paciente");
-                option = scanner.nextInt();
-                scanner.nextLine();
+                if (attributeNumber != 10) {
+	                System.out.println("Digite o novo valor para " + attributeName + ": ");
+	                String value = scanner.nextLine();
+	                patientDAO.updatePatient(cpf, attribute, value);
+	
+	                menu.crudMenu("Paciente");
+	                option = scanner.nextInt();
+	                scanner.nextLine();
+                } else if (attributeNumber == 10) {
+                	System.out.println("Insira o número do exame");
+                	 menu.crudMenu("Paciente");
+ 	                option = scanner.nextInt();
+ 	                scanner.nextLine();
+                }
+               
                 break;
             case 3:
                 patientDAO.getAllPatients();
