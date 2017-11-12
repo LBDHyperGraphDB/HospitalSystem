@@ -9,14 +9,14 @@ public class Person {
 	protected String personGender;
 	protected String personPhoneNumber;
 	protected String personEmail;
-	protected Date personBithDate;
+	protected String personBithDate;
 	
 	public Person() {
 		
 	}
 	
 	public Person(String personCpf, String personName, String personAddress, String personGender,
-			String personPhoneNumber, String personEmail, Date personBithDate) {
+			String personPhoneNumber, String personEmail, String personBithDate) {
 		this.personCpf = personCpf;
 		this.personName = personName;
 		this.personAddress = personAddress;
@@ -74,11 +74,11 @@ public class Person {
 		this.personEmail = personEmail;
 	}
 
-	public Date getPersonBithDate() {
+	public String getPersonBithDate() {
 		return personBithDate;
 	}
 
-	public void setPersonBithDate(Date personBithDate) {
+	public void setPersonBithDate(String personBithDate) {
 		this.personBithDate = personBithDate;
 	}
 }

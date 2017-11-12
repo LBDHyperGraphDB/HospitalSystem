@@ -15,7 +15,7 @@ public class Doctor extends Person {
     }
 
     public Doctor(String personCpf, String personName, String personAddress, String personGender,
-            String personPhoneNumber, String personEmail, Date personBithDate, String doctorCrm,
+            String personPhoneNumber, String personEmail, String personBithDate, String doctorCrm,
             String doctorTitration, String doctorMaritalState, String doctorMotherName,
             String doctorFatherName) {
         super(personCpf, personName, personAddress, personGender, personPhoneNumber, personEmail, personBithDate);
@@ -76,7 +76,7 @@ public class Doctor extends Person {
     }
 
     public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
-        Field field = getClass().getDeclaredField(fieldName);
+        Field field = getClass().getSuperclass().getDeclaredField(fieldName);
         field.set(this, value);
     }
 }

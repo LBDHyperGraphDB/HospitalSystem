@@ -24,7 +24,7 @@ public class PatientController {
     private String gender;
     private String phoneNumber;
     private String email;
-    private Date bithDate;
+    private String bithDate;
     private String healthInsurance;
     private String doctorCRM;
 
@@ -51,7 +51,7 @@ public class PatientController {
                 System.out.println("Digite o e-mail do paciente: ");
                 email = scanner.nextLine();
                 System.out.println("Digite data de nascimento do paciente: ");
-                bithDate = new Date();
+                bithDate = scanner.nextLine();
                 System.out.println("Digite o número do plano de saúde do paciente: ");
                 healthInsurance = scanner.nextLine();
                 System.out.println("Digite o CRM do médico responsável: ");
