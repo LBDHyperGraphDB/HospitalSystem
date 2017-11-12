@@ -1,15 +1,17 @@
 package model;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Laboratory {
 	private String laboratoryCnpj;
 	private String laboratoryDescription;
 	private String laboratoryAddress;
 	private String laboratoryPhoneNumber;
-	
+
 	public Laboratory() {
-		
+
 	}
 
 	public Laboratory(String laboratoryCnpj, String laboratoryDescription, String laboratoryAddress,
@@ -18,6 +20,7 @@ public class Laboratory {
 		this.laboratoryDescription = laboratoryDescription;
 		this.laboratoryAddress = laboratoryAddress;
 		this.laboratoryPhoneNumber = laboratoryPhoneNumber;
+
 	}
 
 	public String getLaboratoryCnpj() {
@@ -51,9 +54,9 @@ public class Laboratory {
 	public void setLaboratoryPhoneNumber(String laboratoryPhoneNumber) {
 		this.laboratoryPhoneNumber = laboratoryPhoneNumber;
 	}
-	
+
 	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
-	    Field field = getClass().getDeclaredField(fieldName);
-	    field.set(this, value);
+		Field field = getClass().getDeclaredField(fieldName);
+		field.set(this, value);
 	}
 }

@@ -1,11 +1,13 @@
 package controller;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.hypergraphdb.HyperGraph;
 
 import dao.LaboratoryDAO;
 import model.Laboratory;
+import model.MedicalExam;
 import view.Menu;
 
 public class LaboratoryController {
@@ -17,6 +19,7 @@ public class LaboratoryController {
 	private String description;
 	private String address;
 	private String phoneNumber;
+	private List<MedicalExam> examList;
 	private int option;
 	
 	public LaboratoryController(HyperGraph hospitalGraph) {
