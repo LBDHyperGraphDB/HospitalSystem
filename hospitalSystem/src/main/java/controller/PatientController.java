@@ -22,6 +22,7 @@ public class PatientController {
     private String email;
     private Date bithDate;
     private String healthInsurance;
+    private String doctorCRM;
 
     private int option;
 
@@ -39,18 +40,20 @@ public class PatientController {
                 name = scanner.nextLine();
                 System.out.println("Digite o endereço do paciente: ");
                 address = scanner.nextLine();
-                System.out.println("Digite o genero do paciente: ");
+                System.out.println("Digite o gênero do paciente: ");
                 gender = scanner.nextLine();
                 System.out.println("Digite o telefone do paciente: ");
                 phoneNumber = scanner.nextLine();
-                System.out.println("Digite o email do paciente: ");
+                System.out.println("Digite o e-mail do paciente: ");
                 email = scanner.nextLine();
                 System.out.println("Digite data de nascimento do paciente: ");
                 bithDate = new Date();
                 System.out.println("Digite o número do plano de saúde do paciente: ");
                 healthInsurance = scanner.nextLine();
+                System.out.println("Digite o CRM do médico responsável");
+                doctorCRM = scanner.nextLine();
 
-                Patient patient = new Patient(cpf, name, address, gender, phoneNumber, email, bithDate, healthInsurance);
+                Patient patient = new Patient(cpf, name, address, gender, phoneNumber, email, bithDate, healthInsurance, doctorCRM);
                 patientDAO.addPatient(patient);
 
                 menu.crudMenu("Paciente");
@@ -61,8 +64,8 @@ public class PatientController {
                 System.out.println("Digite o CPF do paciente: ");
                 cpf = scanner.nextLine();
                 System.out.println("Qual atributo deseja modificar?");
-                System.out.println(
-                        "1- CPF    2- Nome    3- Endereço    4- Genero    5- Telefone    6- Email    7- Data de Nascimento    8- Número do Plano de Saúde");
+                System.out.println("1- CPF    2- Nome    3- Endereço    4- Gênero    5- Telefone");
+                System.out.println("6- Email    7- Data de Nascimento    8- Número do Plano de Saúde");
 
                 int attributeNumber = scanner.nextInt();
                 scanner.nextLine();
@@ -71,28 +74,28 @@ public class PatientController {
                 String attributeName = "";
                 if (attributeNumber == 1) {
                     attribute = "personCpf";
-                    attributeName = "cpf";
+                    attributeName = "CPF";
                 } else if (attributeNumber == 2) {
                     attribute = "personName";
-                    attributeName = "name";
+                    attributeName = "nome";
                 } else if (attributeNumber == 3) {
                     attribute = "personAddress";
-                    attributeName = "address";
+                    attributeName = "endereço";
                 } else if (attributeNumber == 4) {
                     attribute = "personGender";
-                    attributeName = "gender";
+                    attributeName = "gênero";
                 } else if (attributeNumber == 5) {
                     attribute = "personPhoneNumber";
-                    attributeName = "phoneNumber";
+                    attributeName = "telefone";
                 } else if (attributeNumber == 6) {
                     attribute = "personEmail";
-                    attributeName = "email";
+                    attributeName = "e-mail";
                 } else if (attributeNumber == 7) {
                     attribute = "personBithDate";
-                    attributeName = "bithDate";
+                    attributeName = "data de nascimento";
                 } else if (attributeNumber == 8) {
                     attribute = "personHealthInsurance";
-                    attributeName = "healthInsurance";
+                    attributeName = "número do plano de saúde";
                 }
 
                 System.out.println("Digite o novo valor para " + attributeName + ": ");
@@ -110,7 +113,7 @@ public class PatientController {
 
                 if (menu.backToMenu(back)) {
                     this.clear();
-                    menu.crudMenu("Pacientes");
+                    menu.crudMenu("Paciente");
                     option = scanner.nextInt();
                     scanner.nextLine();
                 } else {

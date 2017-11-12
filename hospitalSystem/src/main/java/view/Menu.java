@@ -49,6 +49,8 @@ public class Menu {
     public void reportsMenu(String title) {
     	this.menuTitle(title);
     	System.out.println("1. Relação de Médicos e Enfermeiros");
+    	System.out.println("2. Relação de Pacientes de um Médico");
     	System.out.println("6. Voltar");
+    	System.out.println("Digite a opção desejada:");
     }
 }
