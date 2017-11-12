@@ -8,11 +8,12 @@ import java.util.List;
 import org.hypergraphdb.HGHandle;
 
 import model.MedicalExam;
+import model.Patient;
 
 public class MedicalExamDAO {
 	String databaseLocation = "../hypergraphdb-1.3";
 	HyperGraph hospitalGraph = null;
-	
+
 	public MedicalExamDAO(HyperGraph hospitalGraph) {
 		this.hospitalGraph = hospitalGraph;
 	}
@@ -133,11 +134,13 @@ public class MedicalExamDAO {
 				MedicalExam medicalExam = new MedicalExam();
 				medicalExam = hg.getOne(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", code)));
 				
-				medicalExam.setExamCode(code);
-				hospitalGraph.update(medicalExam);
+				medicalExam.setExamPatientCpf(cpf);
+
+				hospitalGraph.add(medicalExam);
 				System.out.println("[SUCESSO] Paciente atualizado com sucesso!");
 				return true;
 			} else
+				System.out.println("Não foi possível adicionar o exame");
 				return false;
 	   } catch (Throwable t) {
 		   System.out.println("[ERRO]: Não foi possível atualizar o paciente");
@@ -147,4 +150,42 @@ public class MedicalExamDAO {
 		   hospitalGraph.close();
 	   }
 	}
+	
+	public void getExamsOfAPatient(String cpf) {
+		try {
+			hospitalGraph = new HyperGraph(databaseLocation);
+			List<MedicalExam> exams = hg.getAll(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examPatientCpf", cpf)));
+			System.out.println();
+			Patient patient = hg.getOne(hospitalGraph, hg.and(hg.type(Patient.class), hg.eq("personCpf", cpf)));
+			System.out.println("CPF: " + patient.getPersonCpf());
+            System.out.println("Nome do paciente: " + patient.getPersonName());
+            if (exams.size() > 0) {
+                System.out.println("------------------------------");
+                System.out.println("           EXAMES          ");
+                System.out.println("------------------------------");
+                
+                for (MedicalExam exam : exams) {
+                	
+                	String patientExam;
+                	if(patient == null) {
+                		patientExam = "Não há exames solicitados";
+                	} else {
+                		patientExam = patient.getPersonName();
+                	}
+                	
+                    System.out.println("Código do exame: " + exam.getExamCode());
+                    System.out.println("Descrição do exame: " + exam.getExamDescription());
+
+                    System.out.println("------------------------------");
+                }
+            } else {
+                System.out.print("Não há exames cadastrados.");
+            }
+            System.out.println();
+		} catch (Throwable t) {
+			 t.printStackTrace();
+		} finally {
+			hospitalGraph.close();
+		}
+	} 
 }

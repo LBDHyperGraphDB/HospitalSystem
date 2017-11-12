@@ -83,9 +83,26 @@ public class ReportsController {
 	                    option = 6;
 	                }
 	                break;
+	        	case 3:
+	        		menu.menuTitle("Exames de um paciente");
+	        		System.out.println("Digite o CPF do paciente desejado: ");
+	        		String cpf = scanner.nextLine();
+	        		medicalExamDAO.getExamsOfAPatient(cpf);
 	        		
+	        		System.out.println("Deseja voltar ao menu (Sim / Não)?");
+	                back = scanner.nextLine();
+
+	                if (menu.backToMenu(back)) {
+	                    this.clear();
+	                    menu.reportsMenu("Relatórios");
+	                    option = scanner.nextInt();
+	                    scanner.nextLine();
+	                } else {
+	                    option = 6;
+	                }
+	                break;
 	        	case 4:
-	        		menu.menuTitle("Relação de todos os conv�nios do hospital");
+	        		menu.menuTitle("Relação de todos os convênios do hospital");
 	        		medicalAgreementDAO.getAllMedicalAgreements();	        		
 	        		System.out.println("Deseja voltar ao menu (Sim / Não)?");
 	                String goback = scanner.nextLine();
@@ -101,7 +118,7 @@ public class ReportsController {
 	                break;
 	                
 	        	case 5:
-	        		menu.menuTitle("Relação de todos os laborat�rios do hospital e exames realizados por ele");
+	        		menu.menuTitle("Relação de todos os laborat�rios do hospital e exames realizados por ele");
 	        		laboratoryDAO.getAllLaboratoriesExams();
 	        		System.out.println("Deseja voltar ao menu (Sim / Não)?");
 	                String gogoback = scanner.nextLine();

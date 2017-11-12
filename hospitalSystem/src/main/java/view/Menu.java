@@ -49,12 +49,10 @@ public class Menu {
     public void reportsMenu(String title) {
     	this.menuTitle(title);
     	System.out.println("1. Relação de Médicos e Enfermeiros");
-
     	System.out.println("2. Relação de Pacientes de um Médico");
-
-    	System.out.println("4. Relação de todos os conv�nios do hospital");
-    	System.out.println("5. Relação de todos os laborat�rios do hospital e exames realizados por ele");
-
+    	System.out.println("3. Relação de todos os Exames solicitados a um Determinado Paciente");
+    	System.out.println("4. Relação de todos os Convênios do Hospital");
+    	System.out.println("5. Relação de todos os Laboratórios do Hospital e Exames Realizados por ele");
     	System.out.println("6. Voltar");
     	System.out.println("Digite a opção desejada:");
     }
