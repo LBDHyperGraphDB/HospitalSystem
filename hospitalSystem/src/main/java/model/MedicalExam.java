@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 public class MedicalExam {
 	private String examLaboratoryCnpj;
+	private String examPatientCpf;
 
 	private int examCode;
 	private String examDescription;
@@ -51,6 +52,14 @@ public class MedicalExam {
 
 	public void setExamRestriction(String examRestriction) {
 		this.examRestriction = examRestriction;
+	}
+
+	public String getExamPatientCpf() {
+		return examPatientCpf;
+	}
+
+	public void setExamPatientCpf(String examPatientCpf) {
+		this.examPatientCpf = examPatientCpf;
 	}
 
 	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {

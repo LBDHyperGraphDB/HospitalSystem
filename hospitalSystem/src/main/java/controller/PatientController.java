@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 import org.hypergraphdb.HyperGraph;
 
+import dao.MedicalExamDAO;
 import dao.PatientDAO;
+import model.MedicalExam;
 import model.Patient;
 import view.Menu;
 
@@ -13,6 +15,8 @@ public class PatientController {
     Menu menu = new Menu();
     PatientDAO patientDAO = null;
     Scanner scanner = new Scanner(System.in);
+    MedicalExamDAO medicalExamDAO = null;
+    MedicalExam medicalExam = null;
 
     private String cpf;
     private String name;
@@ -114,8 +118,12 @@ public class PatientController {
 	                option = scanner.nextInt();
 	                scanner.nextLine();
                 } else if (attributeNumber == 10) {
-                	System.out.println("Insira o número do exame");
-                	 menu.crudMenu("Paciente");
+                	System.out.println("Insira o código do exame");
+                	int examCode = scanner.nextInt();
+                	
+                	medicalExamDAO.addMedicalExamToPatient(cpf, examCode);
+                	
+                	menu.crudMenu("Paciente");
  	                option = scanner.nextInt();
  	                scanner.nextLine();
                 }

@@ -6,8 +6,7 @@ import java.util.Date;
 public class Patient extends Person {
     private String patientHealthInsurance;
     private String patientDoctorCrm;
-    private String patientExam;
-    
+ 
     public Patient() {
 
     }
@@ -39,14 +38,6 @@ public class Patient extends Person {
     public void setPatientDoctorCrm(String patientDoctorCrm) {
         this.patientDoctorCrm = patientDoctorCrm;
     }
-
-    public String getPatientExam() {
-		return patientExam;
-	}
-
-	public void setPatientExam(String patientExam) {
-		this.patientExam = patientExam;
-	}
 
 	public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
         Field field = getClass().getDeclaredField(fieldName);

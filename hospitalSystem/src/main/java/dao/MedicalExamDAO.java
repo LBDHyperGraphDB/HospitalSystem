@@ -124,4 +124,27 @@ public class MedicalExamDAO {
 			   hospitalGraph.close();
 	   }
 	}
+	
+	public boolean addMedicalExamToPatient(String cpf, int code) {
+		try {
+			hospitalGraph = new HyperGraph(databaseLocation);
+			
+			if (findMedicalExamByCode(hospitalGraph, code)) {
+				MedicalExam medicalExam = new MedicalExam();
+				medicalExam = hg.getOne(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examCode", code)));
+				
+				medicalExam.setExamCode(code);
+				hospitalGraph.update(medicalExam);
+				System.out.println("[SUCESSO] Paciente atualizado com sucesso!");
+				return true;
+			} else
+				return false;
+	   } catch (Throwable t) {
+		   System.out.println("[ERRO]: Não foi possível atualizar o paciente");
+	       t.printStackTrace();
+	       return false;
+	   } finally {
+		   hospitalGraph.close();
+	   }
+	}
 }
