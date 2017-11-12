@@ -41,7 +41,7 @@ public class Nurse extends Person {
     }
 
     public void setField(String fieldName, String value) throws NoSuchFieldException, IllegalAccessException {
-        Field field = getClass().getDeclaredField(fieldName);
+        Field field = getClass().getSuperclass().getDeclaredField(fieldName);
         field.set(this, value);
     }
 }
