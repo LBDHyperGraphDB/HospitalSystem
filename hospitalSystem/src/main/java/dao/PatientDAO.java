@@ -7,6 +7,7 @@ import org.hypergraphdb.HGQuery.hg;
 import org.hypergraphdb.HyperGraph;
 
 import model.Doctor;
+import model.MedicalExam;
 import model.Patient;
 
 public class PatientDAO {

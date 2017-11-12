@@ -190,17 +190,27 @@ public class HospitalSystem {
 	                    // Patients
 	                    case 9:
 	                        view.clear();
-	                        menu.crudMenu("Pacientes");
+	                        //menu.crudMenu("Pacientes");
+	                        menu.menuTitle("Pacientes");
+	                        System.out.println("1. Criar");
+	                        System.out.println("2. Atualizar");
+	                        System.out.println("3. Listar");
+	                        System.out.println("4. Excluir");
+	                        System.out.println("5. Adicionar pedido de exame");
+	                        System.out.println("6. Voltar");
+	                        System.out.println("------------------------------");
+	                        System.out.println("Digite a opção desejada:");
+	                        
 	                        int patientOption = scanner.nextInt();
 	                        scanner.nextLine();
 	                        PatientController patientController = new PatientController(hospitalGraph);
-	                        if (patientOption != 5) {
+	                        if (patientOption != 6) {
 	                            patientController.chooseAction(patientOption);
 	                        } else {
 	                            option = view.backToMainMenu(view, menu, scanner);
 	                        }
 	                        
-	                        if(patientController.getOption() == 5) {
+	                        if(patientController.getOption() == 6) {
 								option = view.backToMainMenu(view, menu, scanner);
 							}
 	                        break;

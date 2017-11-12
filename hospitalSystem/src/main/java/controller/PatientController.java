@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 import org.hypergraphdb.HyperGraph;
 
+import dao.MedicalExamDAO;
 import dao.PatientDAO;
+import model.MedicalExam;
 import model.Patient;
 import view.Menu;
 
@@ -13,6 +15,7 @@ public class PatientController {
     Menu menu = new Menu();
     PatientDAO patientDAO = null;
     Scanner scanner = new Scanner(System.in);
+    MedicalExam medicalExam = null;
 
     private String cpf;
     private String name;
@@ -55,8 +58,15 @@ public class PatientController {
 
                 Patient patient = new Patient(cpf, name, address, gender, phoneNumber, email, bithDate, healthInsurance, doctorCRM);
                 patientDAO.addPatient(patient);
-
-                menu.crudMenu("Paciente");
+                
+                menu.menuTitle("Pacientes");
+                System.out.println("1. Criar");
+                System.out.println("2. Atualizar");
+                System.out.println("3. Listar");
+                System.out.println("4. Excluir");
+                System.out.println("5. Adicionar pedido de exame");
+                System.out.println("6. Voltar");
+                System.out.println("----------------------------");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
@@ -100,15 +110,26 @@ public class PatientController {
                 } else if (attributeNumber == 9) {
                     attribute = "patientDoctorCrm";
                     attributeName = "médico responsável";
+                } else if (attributeNumber == 10) {
+                	attribute = "patientExam";
+                	attributeName = "pedido de exame";
                 }
 
                 System.out.println("Digite o novo valor para " + attributeName + ": ");
                 String value = scanner.nextLine();
                 patientDAO.updatePatient(cpf, attribute, value);
-
-                menu.crudMenu("Paciente");
+                
+                menu.menuTitle("Pacientes");
+                System.out.println("1. Criar");
+                System.out.println("2. Atualizar");
+                System.out.println("3. Listar");
+                System.out.println("4. Excluir");
+                System.out.println("5. Adicionar pedido de exame");
+                System.out.println("6. Voltar");
+                System.out.println("----------------------------");
                 option = scanner.nextInt();
                 scanner.nextLine();
+               
                 break;
             case 3:
                 patientDAO.getAllPatients();
@@ -117,11 +138,18 @@ public class PatientController {
 
                 if (menu.backToMenu(back)) {
                     this.clear();
-                    menu.crudMenu("Paciente");
+                    menu.menuTitle("Pacientes");
+                    System.out.println("1. Criar");
+                    System.out.println("2. Atualizar");
+                    System.out.println("3. Listar");
+                    System.out.println("4. Excluir");
+                    System.out.println("5. Adicionar pedido de exame");
+                    System.out.println("6. Voltar");
+                    System.out.println("----------------------------");
                     option = scanner.nextInt();
                     scanner.nextLine();
                 } else {
-                    option = 5;
+                    option = 6;
                 }
                 break;
             case 4:
@@ -129,26 +157,58 @@ public class PatientController {
                 cpf = scanner.nextLine();
 
                 patientDAO.deletePatient(cpf);
-
-                menu.crudMenu("Paciente");
+                
+                menu.menuTitle("Pacientes");
+                System.out.println("1. Criar");
+                System.out.println("2. Atualizar");
+                System.out.println("3. Listar");
+                System.out.println("4. Excluir");
+                System.out.println("5. Adicionar pedido de exame");
+                System.out.println("6. Voltar");
+                System.out.println("----------------------------");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
-            case 5:
+            case 5: 
+            	System.out.println("Digite o CPF do paciente: ");
+                cpf = scanner.nextLine();
+            	System.out.println("Insira o código do exame");
+            	int examCode = scanner.nextInt();
+            	MedicalExamDAO medicalExamDAO = new MedicalExamDAO(null);
+            	medicalExamDAO.addMedicalExamToPatient(cpf, examCode);
+            	
+            	menu.menuTitle("Pacientes");
+            	System.out.println("1. Criar");
+                System.out.println("2. Atualizar");
+                System.out.println("3. Listar");
+                System.out.println("4. Excluir");
+                System.out.println("5. Adicionar pedido de exame");
+                System.out.println("6. Voltar");
+                System.out.println("----------------------------");
+	            option = scanner.nextInt();
+	            scanner.nextLine();
+            case 6:
                 this.clear();
                 System.out.println("Voltando ao menu principal...");
                 break;
             default:
                 this.clear();
                 System.out.println("Opção inválida! Tente novamente");
-
-                menu.crudMenu("Paciente");
+                
+                menu.menuTitle("Pacientes");
+                System.out.println("1. Criar");
+                System.out.println("2. Atualizar");
+                System.out.println("3. Listar");
+                System.out.println("4. Excluir");
+                System.out.println("5. Adicionar pedido de exame");
+                System.out.println("6. Voltar");
+                System.out.println("----------------------------");
                 option = scanner.nextInt();
                 scanner.nextLine();
                 break;
             }
             this.option = option;
-        } while (option != 5);
+        } while (option != 6);
     }
 
     public int getOption() {
