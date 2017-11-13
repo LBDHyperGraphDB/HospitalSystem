@@ -157,9 +157,10 @@ public class MedicalExamDAO {
 			List<MedicalExam> exams = hg.getAll(hospitalGraph, hg.and(hg.type(MedicalExam.class), hg.eq("examPatientCpf", cpf)));
 			System.out.println();
 			Patient patient = hg.getOne(hospitalGraph, hg.and(hg.type(Patient.class), hg.eq("personCpf", cpf)));
-			System.out.println("CPF: " + patient.getPersonCpf());
-            System.out.println("Nome do paciente: " + patient.getPersonName());
+			
             if (exams.size() > 0) {
+            	System.out.println("CPF: " + patient.getPersonCpf());
+                System.out.println("Nome do paciente: " + patient.getPersonName());
                 System.out.println("------------------------------");
                 System.out.println("           EXAMES          ");
                 System.out.println("------------------------------");

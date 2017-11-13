@@ -93,7 +93,7 @@ public class NurseryDAO {
 				Nursery nursery = new Nursery();
 				nursery = hg.getOne(hospitalGraph, hg.and(hg.type(Nursery.class), hg.eq("nurseryCode", code)));
 				
-				System.out.println(attribute);
+				
 				if(attribute == "nurseryWingOfBuilding") {
 					int newValue = Integer.parseInt(value);
 					if(wingOfBuildingDAO.findWingOfBuildingByCode(hospitalGraph, newValue)) {

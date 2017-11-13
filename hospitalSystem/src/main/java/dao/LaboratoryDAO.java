@@ -101,13 +101,13 @@ public class LaboratoryDAO {
 			System.out.println();
 			if (laboratories.size() > 0) {
 				System.out.println("------------------------------");
-				System.out.println("         LABORATÓRIOS         ");
+				System.out.println("         LABORATÃ“RIOS         ");
 				System.out.println("------------------------------");
 
 				for (Laboratory laboratory : laboratories) {
 					System.out.println("Nome: " + laboratory.getLaboratoryDescription());
 					System.out.println("CNPJ: " + laboratory.getLaboratoryCnpj());
-					System.out.println("Endereço: " + laboratory.getLaboratoryAddress());
+					System.out.println("EndereÃ§o: " + laboratory.getLaboratoryAddress());
 					System.out.println("Telefone: " + laboratory.getLaboratoryPhoneNumber());
 					List<MedicalExam> medicalExams = hg.getAll(hospitalGraph, hg.and(hg.type(MedicalExam.class),
 							hg.eq("examLaboratoryCnpj", laboratory.getLaboratoryCnpj())));
@@ -115,9 +115,9 @@ public class LaboratoryDAO {
 					System.out.println("         Exames  de  " + laboratory.getLaboratoryDescription() + "         ");
 					System.out.println("------------------------------");
 					for (MedicalExam exam : medicalExams) {
-						System.out.println("Código " + exam.getExamCode());
-						System.out.println("Descrição: " + exam.getExamDescription());
-						System.out.println("Restrição: " + exam.getExamRestriction());
+						System.out.println("CÃ³digo: " + exam.getExamCode());
+						System.out.println("DescriÃ§Ã£o: " + exam.getExamDescription());
+						System.out.println("RestriÃ§Ã£o: " + exam.getExamRestriction());
 						System.out.println("------------------------------");
 					}
 					System.out.println("------------------------------");
