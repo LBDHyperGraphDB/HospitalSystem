@@ -190,7 +190,6 @@ public class HospitalSystem {
 	                    // Patients
 	                    case 9:
 	                        view.clear();
-	                        //menu.crudMenu("Pacientes");
 	                        menu.menuTitle("Pacientes");
 	                        System.out.println("1. Criar");
 	                        System.out.println("2. Atualizar");

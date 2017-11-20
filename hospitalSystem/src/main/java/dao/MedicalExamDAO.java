@@ -6,6 +6,7 @@ import org.hypergraphdb.HGQuery.hg;
 import java.util.List;
 
 import org.hypergraphdb.HGHandle;
+import org.hypergraphdb.HGValueLink;
 
 import model.MedicalExam;
 import model.Patient;
@@ -13,9 +14,11 @@ import model.Patient;
 public class MedicalExamDAO {
 	String databaseLocation = "../hypergraphdb-1.3";
 	HyperGraph hospitalGraph = null;
+	PatientDAO patientDAO = null;
 
 	public MedicalExamDAO(HyperGraph hospitalGraph) {
 		this.hospitalGraph = hospitalGraph;
+		patientDAO = new PatientDAO(hospitalGraph);
 	}
 	
 	public boolean addMedicalExam(MedicalExam medicalExam) {
@@ -136,7 +139,10 @@ public class MedicalExamDAO {
 				
 				medicalExam.setExamPatientCpf(cpf);
 
-				hospitalGraph.add(medicalExam);
+				HGHandle addExam =  hospitalGraph.add(medicalExam);
+				HGHandle patientExam = hospitalGraph.getHandle(patientDAO.findPatientByCpf(hospitalGraph, cpf));
+				// Create the link / relationship between atoms
+				new HGValueLink(hospitalGraph, addExam, patientExam);
 				System.out.println("[SUCESSO] Paciente atualizado com sucesso!");
 				return true;
 			} else

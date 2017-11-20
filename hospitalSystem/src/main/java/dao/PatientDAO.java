@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import org.hypergraphdb.HGHandle;
+import org.hypergraphdb.HGValueLink;
 import org.hypergraphdb.HGQuery.hg;
 import org.hypergraphdb.HyperGraph;
 
@@ -27,7 +28,10 @@ public class PatientDAO {
             hospitalGraph = new HyperGraph(databaseLocation);
             // Avoid duplication: do not add if CPF exists.
             if (!this.findPatientByCpf(hospitalGraph, patient.getPersonCpf())) {
-                hospitalGraph.add(patient);
+            	HGHandle addPatient =  hospitalGraph.add(patient);
+				HGHandle patientDoctor = hospitalGraph.getHandle(doctorDAO.findDoctorByCRM(hospitalGraph, patient.getPatientDoctorCrm()));
+				// Create the link / relationship between atoms
+				new HGValueLink(hospitalGraph, addPatient, patientDoctor);
                 System.out.println("[SUCESSO] Paciente adicionado com sucesso!");
                 return true;
             } else {

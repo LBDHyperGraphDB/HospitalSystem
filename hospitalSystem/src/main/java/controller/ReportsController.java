@@ -64,6 +64,8 @@ public class ReportsController {
 	        		System.out.println("Digite o CRM do médico desejado: ");
 	        		String doctorCrm = scanner.nextLine();
 	        		boolean found = doctorDAO.findDoctorByCRM(hospitalGraph, doctorCrm);
+	        		System.out.println(found);
+	        		System.out.println(doctorCrm);
 	        		
 	        		if(found) {
 	        			patientDAO.getPatientsOfADoctor(doctorCrm);
@@ -118,7 +120,7 @@ public class ReportsController {
 	                break;
 	                
 	        	case 5:
-	        		menu.menuTitle("Relação de todos os laborat�rios do hospital e exames realizados por ele");
+	        		menu.menuTitle("Relação de todos os laboratórios e exames realizados por ele");
 	        		laboratoryDAO.getAllLaboratoriesExams();
 	        		System.out.println("Deseja voltar ao menu (Sim / Não)?");
 	                String gogoback = scanner.nextLine();

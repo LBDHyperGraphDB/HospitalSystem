@@ -60,13 +60,13 @@ public class MedicalAgreementController {
 					String attributeName = "";
 					if(attributeNumber == 1) {
 						attribute = "agreementDescription";
-						attributeName = "Descrição";
+						attributeName = "descrição";
 					} else if(attributeNumber == 2) {
 						attribute = "agreementValue";
-						attributeName = "Valor";
+						attributeName = "valor";
 					} else if(attributeNumber == 3) {
 						attribute = "agreementType";
-						attributeName = "Tipo";
+						attributeName = "tipo";
 					}
 
 					

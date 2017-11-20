@@ -1,11 +1,14 @@
 package dao;
 
 import org.hypergraphdb.HGQuery.hg;
+import org.hypergraphdb.HGValueLink;
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HyperGraph;
 
 import java.util.List;
+
 import model.Nursery;
+import model.WingOfBuilding;
 
 public class NurseryDAO {
 	String databaseLocation = "../hypergraphdb-1.3";
@@ -23,7 +26,10 @@ public class NurseryDAO {
 			// Avoid duplication: do not add if code exists.
 			if (!this.findNurseryByCode(hospitalGraph, nursery.getNurseryCode()) &&
 				wingOfBuildingDAO.findWingOfBuildingByCode(hospitalGraph, nursery.getNurseryWingOfBuilding())) {
-				hospitalGraph.add(nursery);
+				HGHandle addNursery =  hospitalGraph.add(nursery);
+				HGHandle nurseryWing = hospitalGraph.getHandle(wingOfBuildingDAO.findWingOfBuildingByCode(hospitalGraph, nursery.getNurseryWingOfBuilding()));
+				// Create the link / relationship between atoms
+				new HGValueLink(hospitalGraph, addNursery, nurseryWing);
 				System.out.println("[SUCESSO] Enfermaria adicionada com sucesso!");
 				return true;
 			} else if(!wingOfBuildingDAO.findWingOfBuildingByCode(hospitalGraph, nursery.getNurseryWingOfBuilding())) {
@@ -55,9 +61,18 @@ public class NurseryDAO {
 				System.out.println("------------------------------");
 				
 				for (Nursery nursery: wards) {
+					
+					WingOfBuilding wingOfBuilding = hg.getOne(hospitalGraph, hg.and(hg.type(WingOfBuilding.class), hg.eq("wingCode", nursery.getNurseryWingOfBuilding())));
+	            	String wingName;
+	            	if(wingOfBuilding == null) {
+	            		wingName = "Não há ala vinculada";
+	            	} else {
+	            		wingName = wingOfBuilding.getWingName();
+	            	}
+	            	
 					System.out.println("Nome: " + nursery.getNurseryDescription());
 					System.out.println("Código: " + nursery.getNurseryCode());
-					System.out.println("Ala: " + nursery.getNurseryWingOfBuilding());
+					System.out.println("Ala: " + wingName);
 					System.out.println("------------------------------");
 				}
 			} else

@@ -72,16 +72,16 @@ public class DoctorDAO {
         }
     }
 
-    public boolean findDoctorByCRM(HyperGraph hospitalGraph, String Crm) {
+    public boolean findDoctorByCRM(HyperGraph hospitalGraph, String doctorCrm) {
         try {
-            List<Doctor> doctors = hg.getAll(hospitalGraph, hg.and(hg.type(Doctor.class), hg.eq("doctorCrm", Crm)));
+            List<Doctor> doctors = hg.getAll(hospitalGraph, hg.and(hg.type(Doctor.class), hg.eq("doctorCrm", doctorCrm)));
             if (doctors.size() > 0) {
                 return true;
             } else {
                 return false;
             }
         } catch (Throwable t) {
-            System.out.println("[ERRO]: Ocorreu um erro ao buscar o CRM " + Crm + ".");
+            System.out.println("[ERRO]: Ocorreu um erro ao buscar o CRM " + doctorCrm + ".");
             t.printStackTrace();
             return false;
 

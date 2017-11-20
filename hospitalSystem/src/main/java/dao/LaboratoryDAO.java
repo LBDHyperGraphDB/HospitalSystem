@@ -2,6 +2,7 @@ package dao;
 
 import org.hypergraphdb.HGQuery.hg;
 import org.hypergraphdb.HGHandle;
+import org.hypergraphdb.HGValueLink;
 import org.hypergraphdb.HyperGraph;
 
 import java.util.ArrayList;
@@ -12,9 +13,11 @@ import model.MedicalExam;
 public class LaboratoryDAO {
 	String databaseLocation = "../hypergraphdb-1.3";
 	HyperGraph hospitalGraph = null;
+	MedicalExamDAO medicalExamDAO = null;
 
 	public LaboratoryDAO(HyperGraph hospitalGraph) {
 		this.hospitalGraph = hospitalGraph;
+		medicalExamDAO = new MedicalExamDAO(hospitalGraph);
 	}
 
 	public boolean addLaboratory(Laboratory laboratory) {
@@ -22,7 +25,10 @@ public class LaboratoryDAO {
 			hospitalGraph = new HyperGraph(databaseLocation);
 			// Avoid duplication: do not add if CNPJ exists.
 			if (!this.findLaboratoryByCnpj(hospitalGraph, laboratory.getLaboratoryCnpj())) {
-				hospitalGraph.add(laboratory);
+				HGHandle addLaboratory =  hospitalGraph.add(laboratory);
+				HGHandle laboratoryExam = hospitalGraph.getHandle(medicalExamDAO.findMedicalExamByCode(hospitalGraph, Integer.parseInt(laboratory.getLaboratoryCnpj())));
+				// Create the link / relationship between atoms
+				new HGValueLink(hospitalGraph, addLaboratory, laboratoryExam);
 				System.out.println("[SUCESSO] Laboratório adicionado com sucesso!");
 				return true;
 			} else {
@@ -100,15 +106,15 @@ public class LaboratoryDAO {
 
 			System.out.println();
 			if (laboratories.size() > 0) {
-				System.out.println("------------------------------");
-				System.out.println("         LABORATÓRIOS         ");
-				System.out.println("------------------------------");
-
 				for (Laboratory laboratory : laboratories) {
+					System.out.println("------------------------------");
+					System.out.println("          LABORATÓRIO         ");
+					System.out.println("------------------------------");
 					System.out.println("Nome: " + laboratory.getLaboratoryDescription());
 					System.out.println("CNPJ: " + laboratory.getLaboratoryCnpj());
 					System.out.println("Endereço: " + laboratory.getLaboratoryAddress());
 					System.out.println("Telefone: " + laboratory.getLaboratoryPhoneNumber());
+					
 					List<MedicalExam> medicalExams = hg.getAll(hospitalGraph, hg.and(hg.type(MedicalExam.class),
 							hg.eq("examLaboratoryCnpj", laboratory.getLaboratoryCnpj())));
 					System.out.println("------------------------------");
@@ -120,7 +126,8 @@ public class LaboratoryDAO {
 						System.out.println("Restrição: " + exam.getExamRestriction());
 						System.out.println("------------------------------");
 					}
-					System.out.println("------------------------------");
+					System.out.println();
+					System.out.println();
 				}
 			} else
 				System.out.print("Não há laboratórios cadastrados.");

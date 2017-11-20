@@ -21,10 +21,10 @@ public class MedicalAgreementDAO {
 			hospitalGraph = new HyperGraph(databaseLocation);
 			if (!this.findMedicalAgreementByCode(hospitalGraph, medicalAgreement.getAgreementCode())) {
 				hospitalGraph.add(medicalAgreement);
-				System.out.println("[SUCESSO] Conv�nio adicionado com sucesso!");
+				System.out.println("[SUCESSO] Convênio adicionado com sucesso!");
 				return true;
 			}else {
-				System.out.println("[ERRO] O código" + medicalAgreement.getAgreementCode() + "já existe");
+				System.out.println("[ERRO] O código " + medicalAgreement.getAgreementCode() + "já existe");
 				return false;
 			}
 		} catch(Throwable t) {
@@ -44,13 +44,13 @@ public class MedicalAgreementDAO {
 			System.out.println();
 			if (medicalAgreements.size() > 0) {
 				System.out.println("------------------------------");
-				System.out.println("         CONVÊNIOS         ");
+				System.out.println("           CONVÊNIOS          ");
 				System.out.println("------------------------------");
 				
 				for (MedicalAgreement medicalAgreement: medicalAgreements) {
-					System.out.println("Código " + medicalAgreement.getAgreementCode());
-					System.out.println("Descrição" + medicalAgreement.getAgreementDescription());
-					System.out.println("Valor: " + medicalAgreement.getAgreementValue());
+					System.out.println("Código: " + medicalAgreement.getAgreementCode());
+					System.out.println("Descrição: " + medicalAgreement.getAgreementDescription());
+					System.out.println("Valor: R$ " + medicalAgreement.getAgreementValue());
 					System.out.println("Tipo: " + medicalAgreement.getAgreementType());
 					System.out.println("------------------------------");
 				}
@@ -90,7 +90,7 @@ public class MedicalAgreementDAO {
 					double newValue = Double.parseDouble(value);
 					medicalAgreement.setAgreementValue(newValue);
 					hospitalGraph.update(medicalAgreement);
-				}else {
+				} else {
 					medicalAgreement.setField(attribute, value);
 					hospitalGraph.update(medicalAgreement);
 				}
@@ -99,7 +99,7 @@ public class MedicalAgreementDAO {
 			} else
 				return false;
 	   } catch (Throwable t) {
-		   System.out.println("[ERRO]: O Convênio de codigo" + value + " não pôde ser atualizado.");
+		   System.out.println("[ERRO]: O Convênio de código " + medicalAgreementCode + " não pôde ser atualizado.");
 	       t.printStackTrace();
 	       return false;
 	   } finally {
